@@ -11,4 +11,5 @@ public class User {
     private String fName;
     private String surName;
 
+    private int id;
 }
