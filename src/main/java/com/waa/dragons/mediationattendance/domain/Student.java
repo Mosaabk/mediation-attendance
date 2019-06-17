@@ -23,6 +23,7 @@ public class Student {
     private String firstName;
     private String lastName;
     private String studentId;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date entryDate;
 

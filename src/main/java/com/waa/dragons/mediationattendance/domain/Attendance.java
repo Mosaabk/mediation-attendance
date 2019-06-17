@@ -21,30 +21,19 @@ import java.util.Date;
 @NoArgsConstructor
 public class Attendance {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private HashMap<Date, Boolean> attendances;
-    private int totalSessionsPossible;
-    private int totalSessionsAttended;
-    private double percentAttendance;
 
+    private Long barCode;
 
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    @OneToMany
-    private List<Block> blocks;
+    private String location;
 
-
-
-    @ManyToOne
-    private Student student;
-
-    @OneToMany(mappedBy = "attendance")
-    private List<MeditationRecord> meditationRecords;
+    private String type;
 
 
 }
