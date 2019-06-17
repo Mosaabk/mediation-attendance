@@ -22,7 +22,8 @@ public class Block {
 
     private LocalDate endDate;
 
-    private int classDays;
+    private String blockName;
+
 
 
 }

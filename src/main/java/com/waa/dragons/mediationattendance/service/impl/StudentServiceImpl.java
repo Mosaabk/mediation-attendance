@@ -8,20 +8,32 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class StudentServiceImpl implements StudentService {
-@Autowired
-    StudentRepository studentRepository;
-    @Override
-    public double getTotalPercentage() {
+
+    @Autowired
+    private StudentRepository studentRepository;
+
+
+    public Student getByID(Integer id) {
+        // TODO Auto-generated method stub
+        return studentRepository.getOne(id);
+    }
+
+
+    public double getTotalPercentage()
+    {
+
         return 0;
     }
 
     @Override
-    public int getTmRetreats() {
+    public int getTmRetreats()
+    {
         return 0;
     }
 
     @Override
-    public int getTmCheckings() {
+    public int getTmCheckings()
+    {
         return 0;
     }
 

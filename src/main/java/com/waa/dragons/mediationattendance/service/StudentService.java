@@ -4,7 +4,7 @@ import com.waa.dragons.mediationattendance.domain.Student;
 
 public interface StudentService {
 
-    double getTotalPercentage();
+
 
     int getTmRetreats();
 

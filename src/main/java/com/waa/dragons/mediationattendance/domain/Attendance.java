@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,16 +21,20 @@ public class Attendance {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    private HashMap<Date, Boolean> attendances;
+    private int totalSessionsPossible;
+    private int totalSessionsAttended;
+    private double percentAttendance;
 
-    private LocalDate date;
+    @OneToMany
+    private List<Block> blocks;
 
-    private String location;
-
-    private String type;
-
-    private long barCode;
 
     @ManyToOne
     private Student student;
 
-}
+    @OneToMany(mappedBy = "attendance")
+    private List<MeditationRecord> meditationRecords;
+
+
+ }
