@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Data
@@ -14,11 +14,12 @@ public class Attendance {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
 
-    private LocalDate date;
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
     private String location;
 
