@@ -18,12 +18,12 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.getOne(id);
     }
 
-    @Override
-    public double getTotalPercentage()
-    {
-
-        return 0;
-    }
+//    @Override
+//    public double getTotalPercentage()
+//    {
+//
+//        return 0;
+//    }
 
     @Override
     public int getTmRetreats()

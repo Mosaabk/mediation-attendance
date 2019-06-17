@@ -17,6 +17,8 @@ public class MeditationRecord {
 
     private Date date;
 
+
+
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "student_id")
     private Student student;
@@ -30,8 +32,8 @@ public class MeditationRecord {
     private TypeTM typeTM;
 
     @ManyToOne
-    @JoinColumn(name = "studentId")
-    private Attendance attendance;
+    @JoinColumn(name = "attend_id")
+    private AttendanceReport attendance;
 
 
 
