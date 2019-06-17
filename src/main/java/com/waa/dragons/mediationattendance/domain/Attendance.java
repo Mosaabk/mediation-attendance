@@ -6,11 +6,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Date;
+
 
 import java.util.Date;
 
@@ -30,10 +32,11 @@ public class Attendance {
     private double percentAttendance;
 
 
-    @OneToMany
-    private List<Block> blocks;
     @Temporal(TemporalType.DATE)
     private Date date;
+
+    @OneToMany
+    private List<Block> blocks;
 
 
 
