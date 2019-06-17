@@ -30,7 +30,7 @@ public class MeditationRecord {
     private TypeTM typeTM;
 
     @ManyToOne
-    @JoinColumn()
+    @JoinColumn(name = "studentId")
     private Attendance attendance;
 
 

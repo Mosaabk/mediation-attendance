@@ -20,14 +20,19 @@ public class Attendance {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-
     private HashMap<Date, Boolean> attendances;
+    private int totalSessionsPossible;
+    private int totalSessionsAttended;
+    private double percentAttendance;
+
+    @OneToMany
+    private List<Block> blocks;
+
 
     @ManyToOne
     private Student student;
 
     @OneToMany(mappedBy = "attendance")
-    @JoinColumn()
     private List<MeditationRecord> meditationRecords;
 
 
