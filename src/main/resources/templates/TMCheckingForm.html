@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TMChecking Form</title>
+</head>
+<body>
+
+<h2>TM Checking form</h2>
+
+<form th:method="post" th:action="@{/TMChecking/addTMChecking}" th:object="${tMChecking}" >
+
+    <label >Enter TMChecking Date:</label>
+    <input type="text"  th:field="*{date}" />
+
+    <label >Enter professor:</label>
+    <input type="text"  th:field="*{teacher}" />
+
+    <input type="submit"  value="AddRetreat"/>
+</form>
+</body>
+</html>

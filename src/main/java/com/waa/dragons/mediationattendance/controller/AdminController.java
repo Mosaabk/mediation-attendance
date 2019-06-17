@@ -1,4 +1,4 @@
-package com.waa.dragons.mediationattendance.controller.admin;
+package com.waa.dragons.mediationattendance.controller;
 
 
 import org.springframework.stereotype.Controller;
@@ -11,19 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
 
-    @GetMapping("/")
+    @GetMapping("/adminRetreat")
     public String getAdminPage(){
-        return "adminDashboard";
+        return "TMRetreatList";
     }
 
-
-    @GetMapping("/tmchecking")
+    @GetMapping("/adminTmchecking")
     public String getTmForm(){
         return "tmForm";
     }
 
     @PostMapping("/add/tmChecking")
-    public String proccessTmForm(){
+    public String proccesTmForm(){
 
         // PRG
         return "redirect:/admin/tmList";

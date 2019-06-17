@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TM Retreat</title>
+   <!-- <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}" />-->
+    <meta charset="utf-8" />
+</head>
+<body>
+
+<h2>Retreat form</h2>
+
+<form th:method="post" th:action="@{/retreat/addRetreat}" th:object="${tmRetreat}" >
+
+    <label >Enter retreate Date:</label>
+    <input type="text"  th:field="*{date}" />
+
+
+
+    <input type="submit"  value="AddRetreat"/>
+</form>
+</body>
+</html>
