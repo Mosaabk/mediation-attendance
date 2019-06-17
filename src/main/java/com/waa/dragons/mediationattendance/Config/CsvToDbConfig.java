@@ -6,26 +6,25 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
 import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
-import org.springframework.batch.item.file.transform.LineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.security.access.SecurityMetadataSource;
+import org.springframework.core.io.FileSystemResource;
 
 import javax.sql.DataSource;
 
@@ -42,6 +41,11 @@ public class CsvToDbConfig {
     @Autowired
     public DataSource dataSource;
 
+    private static final String OVERRIDDEN_BY_EXPRESSION = null;
+
+
+
+
     @Bean
     public Job attendanceJob(JobBuilderFactory jobBuilders, StepBuilderFactory stepBuilders){
         return jobBuilders.get("attendanceReadJob").start(attendanceReadStep()).build();
@@ -50,18 +54,21 @@ public class CsvToDbConfig {
     @Bean
     public Step attendanceReadStep(){
         return stepBuilderFactory.get("attendanceReadStep")
-                .<Attendance, Attendance>chunk(10)
-                .reader(reader())
+                .<Attendance, Attendance>chunk(100)
+                .reader(reader(OVERRIDDEN_BY_EXPRESSION))
                 .processor(processor())
                 .writer(writer()).build();
     }
 
     @Bean
-    public FlatFileItemReader<Attendance> reader(){
+    @Scope(value = "step", proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public FlatFileItemReader<Attendance> reader(@Value("#{jobParameters[fullPathFileName]}")
+                                                             String pathToFile){
 
+        System.out.println(pathToFile);
         return new FlatFileItemReaderBuilder<Attendance>()
                 .name("attendanceReader")
-                .resource(new ClassPathResource("medAttend.csv"))
+                .resource(new ClassPathResource("tmp/medAttend.csv"))
                 .delimited().names(new String[] {"barCode", "date", "location","type"})
                 .targetType(Attendance.class).build();
 
