@@ -1,12 +1,22 @@
 package com.waa.dragons.mediationattendance.service.impl;
 
+<<<<<<< HEAD
 import com.waa.dragons.mediationattendance.repository.AttendanceRepository;
+import com.waa.dragons.mediationattendance.domain.Attendance;
+
+=======
+import com.waa.dragons.mediationattendance.domain.Attendance;
+>>>>>>> mk
 import com.waa.dragons.mediationattendance.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
+<<<<<<< HEAD
+
 
     @Autowired
     private AttendanceRepository attendanceRepository;
@@ -15,4 +25,21 @@ public class AttendanceServiceImpl implements AttendanceService {
     public double getTotalAttendancePercentage() {
         return 0;
     }
+
+
+=======
+>>>>>>> mk
+    @Override
+    public Attendance save(Attendance attendance) {
+        return null;
+    }
+
+    @Override
+    public List<Attendance> saveAll(List<Attendance> attendances) {
+        return null;
+    }
+<<<<<<< HEAD
+
+=======
+>>>>>>> mk
 }
