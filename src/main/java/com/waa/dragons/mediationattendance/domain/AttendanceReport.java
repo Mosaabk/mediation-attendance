@@ -5,14 +5,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-<<<<<<< HEAD
+
+
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-=======
 import java.util.Date;
->>>>>>> mk
+
+
+import java.util.Date;
 
 @Entity
 @Data
@@ -31,13 +33,13 @@ public class AttendanceReport {
     private int totalSessionsAttended;
     private double percentAttendance;
 
-<<<<<<< HEAD
-    @OneToMany
-    private List<Block> blocks;
-=======
+
     @Temporal(TemporalType.DATE)
     private Date date;
->>>>>>> mk
+
+    @OneToMany
+    private List<Block> blocks;
+
 
 
     @ManyToOne
