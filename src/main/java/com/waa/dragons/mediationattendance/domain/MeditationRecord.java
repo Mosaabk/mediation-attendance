@@ -17,8 +17,9 @@ public class MeditationRecord {
 
     private Date date;
 
-
-
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "block_session")
+    private BlockSession blockSession;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "student_id")
     private Student student;

@@ -24,9 +24,7 @@ public class Student {
     private String lastName;
     private String studentId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date entryDate;
-
-//    private LocalDate entry;
+    private LocalDate entryDate;
 
     @OneToMany(mappedBy = "student", cascade={CascadeType.PERSIST, CascadeType.MERGE})
     private List<MeditationRecord> meditationRecords;

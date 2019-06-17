@@ -12,18 +12,10 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-
-    public Student getByID(Integer id) {
-        // TODO Auto-generated method stub
+    @Override
+    public Student getById(Integer id) {
         return studentRepository.getOne(id);
     }
-
-//    @Override
-//    public double getTotalPercentage()
-//    {
-//
-//        return 0;
-//    }
 
     @Override
     public int getTmRetreats()

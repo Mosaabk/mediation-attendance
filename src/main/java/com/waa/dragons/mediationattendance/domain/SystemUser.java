@@ -22,7 +22,7 @@ public class SystemUser {
 
 
     @OneToMany
-    List<Role> roles;
+    private List<Role> roles;
 
 
 

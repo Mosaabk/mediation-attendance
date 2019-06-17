@@ -20,6 +20,8 @@ public class AttendanceReport {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @OneToMany
+    private List<BlockSession> blockSession;
     private HashMap<Date, Boolean> attendances;
     private int totalSessionsPossible;
     private int totalSessionsAttended;
