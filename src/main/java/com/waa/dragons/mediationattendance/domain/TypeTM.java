@@ -14,7 +14,7 @@ public class TypeTM {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String typeName;
+    private String typeName;//EAM or AM
     private String startTime;
     private String endTime;
 
