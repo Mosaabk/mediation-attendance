@@ -10,5 +10,5 @@ public interface AttendanceService {
 
     Attendance save(Attendance attendance);
     List<Attendance> saveAll(List<Attendance> attendances);
-    
+
 }

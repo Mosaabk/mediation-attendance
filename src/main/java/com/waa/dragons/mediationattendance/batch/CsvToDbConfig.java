@@ -1,4 +1,6 @@
-package com.waa.dragons.mediationattendance.Config;
+package com.waa.dragons.mediationattendance.batch;
+
+import com.waa.dragons.mediationattendance.Config.DBLogProcessor;
 
 import com.waa.dragons.mediationattendance.domain.Attendance;
 import org.springframework.batch.core.Job;
@@ -8,6 +10,8 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
@@ -28,20 +32,28 @@ import org.springframework.core.io.FileSystemResource;
 
 import javax.sql.DataSource;
 
-@EnableBatchProcessing
 @Configuration
+@EnableBatchProcessing
 public class CsvToDbConfig {
 
     @Autowired
-    public JobBuilderFactory jobBuilderFactory;
+    private JobBuilderFactory jobBuilderFactory;
 
     @Autowired
-    public StepBuilderFactory stepBuilderFactory;
+    private StepBuilderFactory stepBuilderFactory;
 
     @Autowired
-    public DataSource dataSource;
+    private DataSource dataSource;
 
-    private static final String OVERRIDDEN_BY_EXPRESSION = null;
+    @Autowired
+    private ItemReader<DefaultAttendance> itemReader;
+
+    @Autowired
+    private ItemProcessor<DefaultAttendance, Attendance> defaultItemProcessor;
+
+    @Autowired
+    private ItemWriter<Attendance> itemWriter;
+
 
 
 
@@ -54,40 +66,45 @@ public class CsvToDbConfig {
     @Bean
     public Step attendanceReadStep(){
         return stepBuilderFactory.get("attendanceReadStep")
-                .<Attendance, Attendance>chunk(100)
-                .reader(reader(OVERRIDDEN_BY_EXPRESSION))
-                .processor(processor())
-                .writer(writer()).build();
+                .<DefaultAttendance, Attendance>chunk(1000)
+                .reader(itemReader)
+                .processor(defaultItemProcessor)
+                .writer(itemWriter).build();
     }
+
+//    @Bean
+//    public Step attendanceReadStepManual(){
+//        return stepBuilderFactory.get("attendanceReadStepManual")
+//                .<>
+//    }
 
     @Bean
     @Scope(value = "step", proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public FlatFileItemReader<Attendance> reader(@Value("#{jobParameters[fullPathFileName]}")
-                                                             String pathToFile){
+    public FlatFileItemReader<DefaultAttendance> reader(@Value("#{jobParameters[fileName]}")
+                                                             String fileName){
 
-        System.out.println(pathToFile);
-        return new FlatFileItemReaderBuilder<Attendance>()
+        return new FlatFileItemReaderBuilder<DefaultAttendance>()
                 .name("attendanceReader")
                 .resource(new ClassPathResource("tmp/medAttend.csv"))
-                .delimited().names(new String[] {"barCode", "date", "location","type"})
-                .targetType(Attendance.class).build();
+                .delimited().names(new String[] {"barCode", "date","type", "location"})
+                .targetType(DefaultAttendance.class).build();
 
     }
 
 
-    @Bean
-    public ItemProcessor<Attendance, Attendance> processor() {
-        return new DBLogProcessor();
-    }
+//    @Bean
+//    public ItemProcessor<Attendance, Attendance> processor() {
+//        return new DBLogProcessor();
+//    }
 
-    @Bean
-    public JdbcBatchItemWriter<Attendance> writer(){
-        return new JdbcBatchItemWriterBuilder<Attendance>()
-                .dataSource(dataSource)
-                .sql("INSERT INTO ATTENDANCE (BAR_CODE, DATE, LOCATION, TYPE) VALUES (:barCode, :date, :location, :type)")
-                .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Attendance>())
-                .build();
-    }
+//    @Bean
+//    public JdbcBatchItemWriter<Attendance> writer(){
+//        return new JdbcBatchItemWriterBuilder<Attendance>()
+//                .dataSource(dataSource)
+//                .sql("INSERT INTO ATTENDANCE (BAR_CODE, DATE, LOCATION, TYPE) VALUES (:barCode, :date, :location, :type)")
+//                .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Attendance>())
+//                .build();
+//    }
 
     @Bean
     public LineMapper<Attendance> lineMapper() {

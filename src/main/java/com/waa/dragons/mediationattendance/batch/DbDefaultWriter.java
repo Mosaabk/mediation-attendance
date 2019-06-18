@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class DBWriter implements ItemWriter<Attendance> {
+public class DbDefaultWriter implements ItemWriter<Attendance> {
 
     @Autowired
     private AttendanceService attendanceService;
@@ -19,8 +19,10 @@ public class DBWriter implements ItemWriter<Attendance> {
 
     @Override
     public void write(List<? extends Attendance> attendances) throws Exception {
-        System.out.println("Data Saved for Attendance " + attendances);
-        attendanceService.saveAll((List<Attendance>)attendances);
+        System.out.println("Insert INTO Attendance " + attendances);
+        for(Attendance attendance : attendances){
+            attendanceService.save(attendance);
+        }
 
     }
 
