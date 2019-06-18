@@ -1,4 +1,6 @@
 package com.waa.dragons.mediationattendance.service.impl;
+import com.waa.dragons.mediationattendance.domain.Block;
+import com.waa.dragons.mediationattendance.domain.Student;
 import com.waa.dragons.mediationattendance.repository.AttendanceRepository;
 import com.waa.dragons.mediationattendance.domain.Attendance;
 
@@ -31,5 +33,15 @@ public class AttendanceServiceImpl implements AttendanceService {
     public List<Attendance> saveAll(List<Attendance> attendances) {
         return null;
     }
+
+    public List<Attendance> findAllByStudentAndBlock(Student stu, Block block){
+        return (List<Attendance>)attendanceRepository.findAllByStudentAndBlock(stu, block);
+    }
+
+    public List<Attendance> findAllByStudent(Student stu){
+        return (List<Attendance>) attendanceRepository.findAllByStudent(stu);
+    }
+
+
 
 }

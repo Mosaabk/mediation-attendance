@@ -13,13 +13,6 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
 
-    public Student getByID(Integer id) {
-        // TODO Auto-generated method stub
-        return studentRepository.getOne(id);
-    }
-
-
-
     public double getTotalPercentage() {
 
         return 0;
@@ -45,9 +38,18 @@ public class StudentServiceImpl implements StudentService {
         return null;
     }
 
+    @Override
+    public Student findStudentByStudentId(String studentId) {
+      return studentRepository.findStudentByStudentId(studentId);
+    }
+
     public Student findStudentByBarCode(String barCode){
         return studentRepository.findStudentByBarCode(barCode);
 
+    }
+
+    public Student findStudentByStudentId(Long studentId){
+        return null;
     }
 
 

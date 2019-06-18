@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance List</title>
+</head>
+<body>
+
+<h1 th:text="'List of Block for'+ ${stu.firstName}"> </h1>
+<ul th:each="blo:${blocks}">
+    <li th:text="${blo.blockName}"></li>
+
+</ul>
+<form>
+    <label>Block</label>
+    <select name="rank">
+    <option th:each=" rr:${blocks}" th:value="${rr.blockName}" th:text="${rr.blockName}"></option>
+</select>
+</form>
+
+
+
+
+
+<!--<h1 th:text="'Attendance for ' + ${stu.firstName} + ' ' + ${stu.lastName}"></h1>
+<ul th:each="attend : ${attendances}">
+    <li th:text="${attend.date} + ' - ' + ${attend.block} + ' - ' +${attend.place}"></li>
+</ul>
+
+
+<h1 th:text="'Attendance for ' + ${stu.firstName} + ' ' + ${stu.lastName}"></h1>
+<ul th:each="attend : ${attendances}">
+    <li th:text="${attend.date} + ' - ' + ${attend.block} + ' - ' +${attend.place}"></li>
+</ul>-->
+</body>
+</html>

@@ -13,6 +13,7 @@ public interface StudentService {
     int getHowManyDaysLeft();
     public Student getById(int id);
 
+    Student findStudentByStudentId(String studentId);
 
     Student findStudentByBarCode(String barCode);
 
