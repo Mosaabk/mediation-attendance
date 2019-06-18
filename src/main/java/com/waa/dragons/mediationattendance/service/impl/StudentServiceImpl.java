@@ -19,21 +19,19 @@ public class StudentServiceImpl implements StudentService {
     }
 
 
-    public double getTotalPercentage()
-    {
+
+    public double getTotalPercentage() {
 
         return 0;
     }
 
     @Override
-    public int getTmRetreats()
-    {
+    public int getTmRetreats() {
         return 0;
     }
 
     @Override
-    public int getTmCheckings()
-    {
+    public int getTmCheckings() {
         return 0;
     }
 
@@ -43,7 +41,15 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student getById( int id) {
-        return  studentRepository.findById(id).get();
+    public Student getById(int id) {
+        return null;
     }
+
+    public Student findStudentByBarCode(String barCode){
+        return studentRepository.findStudentByBarCode(barCode);
+
+    }
+
+
+
 }
