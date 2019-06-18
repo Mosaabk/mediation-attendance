@@ -26,6 +26,10 @@
 	<link th:href="@{/assets/weather/weather-icons.min.css}" rel="stylesheet" type="text/css">
 	<link th:href="@{/assets/weather/weather-icons-wind.min.css}" rel="stylesheet" type="text/css">
 
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
 	<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -33,7 +37,26 @@
 
 	<script th:src="@{/ajax/ajax.js}"></script>
 
-	<script th:src="@{/js/maps/google/markers/symbols_custom.js}"></script>
+
+	<!-- Core JS files -->
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/fancybox.min.js}"></script>
+	<script th:src="@{/js/app.js}"></script>
+
+	<script th:src="@{/js/moment.min.js}"></script>
+
+	<script th:src="@{/js/forms/daterangepicker.js}"></script>
+	<script th:src="@{/js/forms/pickadate/picker.js}"></script>
+	<script th:src="@{/js/forms/pickadate/picker.date.html}"></script>
+	<script th:src="@{/js/forms/pickadate/picker.time.js}"></script>
+	<script th:src="@{/js/forms/pickadate/legacy.js}"></script>
+
+	<script>
+		$( function() {
+			$( "#datepicker" ).datepicker();
+		} );
+	</script>
 </head>
 <body>
 
@@ -176,10 +199,11 @@
 
 
 			<div class="content">
+
 			<div class="col-md-6 col-sm-6">
 				<div class="panel panel-info">
 					<div class="panel-heading">
-						<h4 class="panel-title">Info panel</h4>
+						<h4 class="panel-title">Add TM</h4>
 
 					</div>
 
@@ -192,7 +216,7 @@
 							<label >Enter professor:</label>
 							<input type="text"  th:field="*{teacher}" /><br>
 
-							<input type="submit"  value="AddRetreat"/>
+							<input type="submit"  value="Add TM Checking"/>
 						</form>
 					</div>
 				</div>
@@ -205,7 +229,7 @@
 			<div class="col-md-6 col-sm-6">
 				<div class="panel panel-info">
 					<div class="panel-heading">
-						<h4 class="panel-title">Info panel</h4>
+						<h4 class="panel-title">Add TM</h4>
 
 					</div>
 
@@ -214,11 +238,8 @@
 
 							<label th:for="date">Enter TMChecking Date:</label>
 							<input type="text"  th:field="*{date}" th:id="date"/> <br>
-
-							<label >Enter professor:</label>
-							<input type="text"  th:field="*{teacher}" /><br>
-
-							<input type="submit"  value="AddRetreat"/>
+<br><br>
+							<input type="submit"  value="Add TM Checking"/>
 						</form>
 					</div>
 				</div>
@@ -226,9 +247,46 @@
 
 
 
+				<p>Date: <input type="text" id="datepicker"></p>
 
 
-				<h4>Date pickers</h4>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="panel panel-flat">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									Add Retreat
+								</h4>
+							</div>
+							<div class="panel-body">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+									<input type="text" class="form-control daterange-single" value="06/18/2019">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="panel panel-flat">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									Add Block
+								</h4>
+							</div>
+							<div class="panel-body">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+									<input type="text" class="form-control daterange-datemenu" value="04/18/2019 - 05/18/2019">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
 				<div class="row">
 					<div class="col-md-6">
 						<div class="panel panel-flat">
@@ -245,26 +303,19 @@
 							</div>
 						</div>
 					</div>
+
+
+
 					<div class="col-md-6">
-						<div class="panel panel-flat">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									Display date dropdowns
-								</h4>
-							</div>
-							<div class="panel-body">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-									<input type="text" class="form-control daterange-datemenu" value="04/18/2016 - 05/18/2016">
-								</div>
-							</div>
+
+					<div class="form-group">
+						<label class="control-label col-lg-4">Number of days per block</label>
+						<div class="col-lg-8">
+							<input type="text" class="form-control">
 						</div>
 					</div>
 				</div>
-
-
-
-
+				</div>
 		</div>
 
 

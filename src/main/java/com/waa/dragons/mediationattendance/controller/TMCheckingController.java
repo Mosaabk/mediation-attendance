@@ -34,7 +34,7 @@ public class TMCheckingController {
     @PostMapping("/addTMChecking")
     public String process(@Valid @ModelAttribute("tMChecking")TMChecking tmChecking, BindingResult result, Model model){
         if(result.hasErrors()){
-            return "tmschedule";
+            return "TMChecking";
         }
 
      tmCheckingService.save(tmChecking);
