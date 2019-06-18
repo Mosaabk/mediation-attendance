@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.waa.dragons.mediationattendance.controller;
 
 
@@ -17,3 +18,13 @@ public class FacultyController {
 
 
 }
+=======
+package com.waa.dragons.mediationattendance.controller;
+
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class FacultyController {
+}
+>>>>>>> 024eb1b62b34cac2b1487b2a179662675ca36953

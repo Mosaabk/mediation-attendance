@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.waa.dragons.mediationattendance.service;
 
 import com.waa.dragons.mediationattendance.domain.TMRetreat;
@@ -13,3 +14,9 @@ public interface TMRetreatService {
     public TMRetreat getById(int id);
     public void delete(int id);
 }
+=======
+package com.waa.dragons.mediationattendance.service;
+
+public interface TMRetreatService {
+}
+>>>>>>> 024eb1b62b34cac2b1487b2a179662675ca36953

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.waa.dragons.mediationattendance.service.impl;
 
 
@@ -39,3 +40,14 @@ public class TMRetreatServiceImpl implements TMRetreatService {
 
     }
 }
+=======
+package com.waa.dragons.mediationattendance.service.impl;
+
+
+import com.waa.dragons.mediationattendance.service.TMRetreatService;
+import org.springframework.stereotype.Service;
+
+@Service
+public class TMRetreatServiceImpl implements TMRetreatService {
+}
+>>>>>>> 024eb1b62b34cac2b1487b2a179662675ca36953
