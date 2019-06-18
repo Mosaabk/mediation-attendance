@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/retreat")
+@RequestMapping("/tmretreat")
 public class TMRetreatController {
     @Autowired
     TMRetreatService tmRetreatService;
 
-    @GetMapping("/addRetreat")
+    @GetMapping("")
     public String getRetreatForm(@ModelAttribute("tmRetreat")TMRetreat tmRetreat, Model model){
-        return "RetreatForm2";
+        return "TMRetreat";
     }
     @PostMapping("/addRetreat")
-    public String processRetreat(@Valid@ModelAttribute("tmRetreat")TMRetreat tmRetreat, BindingResult result,Model model){
+    public String processRetreat(@Valid@ModelAttribute("tmretreat")TMRetreat tmRetreat, BindingResult result,Model model){
         if(result.hasErrors()){
             return "RetreatForm2";
         }

@@ -40,7 +40,9 @@
 <!-- Main navbar -->
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-header">
-		 <h4 style="color: white" align="center"> Meditation Attendance System</h4>
+		<a class="sidebar-mobile-toggle visible-xs"><i class="fa fa-ellipsis-v"></i></a>
+		<a class="navbar-brand" href="index.htm"></a>
+		<a class="sidebar-control sidebar-toggle hidden-xs pull-right"><i class="fa fa-bars"></i></a>
 	</div>
 	<ul class="navbar-right">
 		<li class="dropdown clearfix">
@@ -105,7 +107,7 @@
 						<div class="media">
 							<a href="index.htm#" class="media-left"><img src="assets/images/users/user6.png" class="img-circle img-sm" alt=""></a>
 							<div class="media-body">
-								<span class="media-heading text-semibold">Abdu E</span>
+								<span class="media-heading text-semibold">Andrew Brewer</span>
 								<div class="text-size-mini text-muted">
 									Network engineer
 								</div>
@@ -174,105 +176,22 @@
 			<!-- /page header -->
 
 
-
-			<div class="content">
-			<div class="col-md-6 col-sm-6">
-				<div class="panel panel-info">
-					<div class="panel-heading">
-						<h4 class="panel-title">Info panel</h4>
-
-					</div>
-
-					<div class="panel-body">
-						<form th:method="post" th:action="@{/TMChecking/addTMChecking}" th:object="${tMChecking}" >
-
-							<label th:for="date">Enter TMChecking Date:</label>
-							<input type="text"  th:field="*{date}" th:id="date"/> <br>
-
-							<label >Enter professor:</label>
-							<input type="text"  th:field="*{teacher}" /><br>
-
-							<input type="submit"  value="AddRetreat"/>
-						</form>
-					</div>
-				</div>
-			</div>
-
-
-
-
-
-			<div class="col-md-6 col-sm-6">
-				<div class="panel panel-info">
-					<div class="panel-heading">
-						<h4 class="panel-title">Info panel</h4>
-
-					</div>
-
-					<div class="panel-body">
-						<form th:method="post" th:action="@{/TMChecking/addTMChecking}" th:object="${tMChecking}" >
-
-							<label th:for="date">Enter TMChecking Date:</label>
-							<input type="text"  th:field="*{date}" th:id="date"/> <br>
-
-							<label >Enter professor:</label>
-							<input type="text"  th:field="*{teacher}" /><br>
-
-							<input type="submit"  value="AddRetreat"/>
-						</form>
-					</div>
-				</div>
-			</div>
-
-
-
-
-
-				<h4>Date pickers</h4>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="panel panel-flat">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									Basic single date picker
-								</h4>
-							</div>
-							<div class="panel-body">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-									<input type="text" class="form-control daterange-single" value="04/18/2016">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-flat">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									Display date dropdowns
-								</h4>
-							</div>
-							<div class="panel-body">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-									<input type="text" class="form-control daterange-datemenu" value="04/18/2016 - 05/18/2016">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-
-
-		</div>
-
-
+			<div id="content"> </div>
 
 			<!-- Content area -->
 
 			<!-- /content area -->
+		<!--	<form th:method="post" th:action="@{/TMChecking/addTMChecking}" th:object="${tmretreat}" >
 
+				<label >Enter TMChecking Date:</label>
+				<input type="text"  th:field="*{date}" />
+
+				<label >Enter professor:</label>
+				<input type="text"  th:field="*{teacher}" />
+
+				<input type="submit"  value="AddRetreat"/>
+			</form>-->
+		</div>
 		<!-- /main content -->
 
 	</div>

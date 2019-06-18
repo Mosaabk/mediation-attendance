@@ -24,7 +24,7 @@ public class TMCheckingController {
     @Autowired
     StudentService studentService;
 
-    @GetMapping("/addTMChecking")
+    @GetMapping("")
     public String getForm(@ModelAttribute("tMChecking") TMChecking tmChecking, Model model){
 
 //        return "TMCheckingForm";
@@ -34,7 +34,7 @@ public class TMCheckingController {
     @PostMapping("/addTMChecking")
     public String process(@Valid @ModelAttribute("tMChecking")TMChecking tmChecking, BindingResult result, Model model){
         if(result.hasErrors()){
-            return "TMCheckingForm";
+            return "tmschedule";
         }
 
      tmCheckingService.save(tmChecking);

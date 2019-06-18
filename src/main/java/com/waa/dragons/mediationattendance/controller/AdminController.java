@@ -16,6 +16,13 @@ public class AdminController {
         return "adminRetreat";
     }
 
+    @GetMapping("/TMSchedule")
+    public String TMSchedule(){
+        return "TMSchedule";
+    }
+
+
+
     @GetMapping("/adminTmchecking")
     public String getTmForm(){
         return "tmForm";
