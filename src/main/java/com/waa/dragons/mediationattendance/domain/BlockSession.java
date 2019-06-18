@@ -21,10 +21,5 @@ public class BlockSession {
     private Block block;
     private Date session;
 
-    @OneToMany(mappedBy = "blockSession")
-    private List<MeditationRecord> meditationRecord;
 
-    @ManyToOne
-    @JoinColumn(name= "attendance_id")
-    private AttendanceReport attendanceReport;
 }

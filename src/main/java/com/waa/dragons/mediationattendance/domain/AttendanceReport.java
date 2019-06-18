@@ -1,18 +1,12 @@
 package com.waa.dragons.mediationattendance.domain;
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
-
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
-
 
 @Entity
 @Data
@@ -24,26 +18,14 @@ public class AttendanceReport {
     private Long id;
 
     @OneToMany
-    private List<BlockSession> blockSession;
-    private HashMap<Date, Boolean> attendances;
-    private int totalSessionsPossible;
-    private int totalSessionsAttended;
-    private double percentAttendance;
+    private List<Block> blocks;
 
-    @ManyToOne
-    private Student student;
+   // private  String blockName;
 
-    private LocalDate date;
+    private HashMap<Date, Boolean> attendanceDates;
 
-    @ManyToOne
-    private Block block;
+    private double attendancePercentage;
 
-    @ManyToOne
-    private Place place;
-
-
-
-    private String type;
-
+    private double extraCreditPoints;
 
 }

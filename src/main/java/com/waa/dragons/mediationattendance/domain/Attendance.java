@@ -29,5 +29,4 @@ public class Attendance {
 
     private String type;
 
-
 }
