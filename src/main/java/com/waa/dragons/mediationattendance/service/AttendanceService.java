@@ -1,6 +1,8 @@
 package com.waa.dragons.mediationattendance.service;
 
 import com.waa.dragons.mediationattendance.domain.Attendance;
+import com.waa.dragons.mediationattendance.domain.Block;
+import com.waa.dragons.mediationattendance.domain.Student;
 
 import java.util.List;
 
@@ -10,5 +12,9 @@ public interface AttendanceService {
 
     Attendance save(Attendance attendance);
     List<Attendance> saveAll(List<Attendance> attendances);
+    List<Attendance> findAllByStudent(Student student);
+    List<Attendance> findAllByStudentAndAndBlock(Student student, Block block);
+
+
 
 }

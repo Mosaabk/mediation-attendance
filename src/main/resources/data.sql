@@ -1,5 +1,3 @@
-
-
 INSERT INTO entry (ID , NAME) VALUES (1, 'February 2018');
 INSERT INTO entry (ID , NAME) VALUES (2, 'April 2018');
 INSERT INTO entry (ID , NAME) VALUES (3, 'August 2018');
@@ -8,7 +6,6 @@ INSERT INTO entry (ID , NAME) VALUES (5, 'February 2019');
 INSERT INTO entry (ID , NAME) VALUES (6, 'April 2019');
 INSERT INTO entry (ID , NAME) VALUES (7, 'August 2019');
 INSERT INTO entry (ID , NAME) VALUES (8, 'October 2019');
-
 
 --BLOCKs
 INSERT INTO block (ID,START_DATE, END_DATE, BLOCK_NAME) VALUES(1 ,'2016-10-01', '2016-10-30','2016-October' );

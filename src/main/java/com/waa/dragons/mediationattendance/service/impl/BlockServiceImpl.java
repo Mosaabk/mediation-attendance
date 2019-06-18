@@ -16,6 +16,10 @@ public class BlockServiceImpl implements BlockService {
     BlockRepository blockRepository;
 
 
+    @Override
+    public Block findBlockByBlockName(String name) {
+        return blockRepository.findBlockByBlockName(name);
+    }
 
     @Override
     public Optional<Block> findBlockByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate startDate, LocalDate endDate) {

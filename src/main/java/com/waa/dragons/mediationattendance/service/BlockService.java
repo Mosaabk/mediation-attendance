@@ -8,6 +8,8 @@ import java.util.Optional;
 
 @Service
 public interface BlockService {
+    Block findBlockByBlockName(String name);
+
     Optional<Block> findBlockByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate startDate, LocalDate endDate);
 
 }

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance List</title>
+</head>
+<body>
+
+<h1>All Attendances</h1>
+<ul th:each="att : ${attendances}">
+    <li th:text="${att.getDate()}"></li>
+</ul>
+
+
+<h1 th:text="'Attendance By Block for ' +${stu.firstName} +' ' + ${stu.lastName}"></h1>
+
+
+
+<ul th:each="att : ${blockAttendances}">
+    <li th:text="${att.getDate()}"></li>
+</ul>
+</body>
+</html>

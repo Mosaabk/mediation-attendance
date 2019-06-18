@@ -13,13 +13,15 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
 
-    public Student getByID(Integer id) {
-        // TODO Auto-generated method stub
-        return studentRepository.getOne(id);
-    }
+
 
     public Student findStudentByBarCode(String barCode){
         return studentRepository.findStudentByBarCode(barCode);
+    }
+
+    @Override
+    public Student findStudentByStudentId(String studentId) {
+        return studentRepository.findStudentByStudentId(studentId);
     }
 
 

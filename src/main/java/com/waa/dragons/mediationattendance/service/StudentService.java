@@ -15,6 +15,8 @@ public interface StudentService {
 
     Student findStudentByBarCode(String barCode);
 
+    Student findStudentByStudentId(String studentId);
+
 
 
 }

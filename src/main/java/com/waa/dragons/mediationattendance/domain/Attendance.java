@@ -38,7 +38,6 @@ public class Attendance {
     private Place place;
 
 
-
     private String type;
 
 

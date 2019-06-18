@@ -12,6 +12,6 @@ import java.util.Optional;
 @Repository
 public interface BlockRepository extends CrudRepository<Block, Integer> {
 
-
+    Block findBlockByBlockName(String name);
     Optional<Block> findBlockByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate startDate, LocalDate endDate);
 }
