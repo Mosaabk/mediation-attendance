@@ -4,19 +4,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class TypeTM {
+public class BlockSession {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String typeName;//EAM or AM
-    private String startTime;
-    private String endTime;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "block_id")
+    private Block block;
+    private Date session;
 
 
 }

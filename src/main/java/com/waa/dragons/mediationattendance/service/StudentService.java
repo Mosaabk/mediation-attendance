@@ -6,6 +6,7 @@ public interface StudentService {
 
 
 
+    Student getById(Integer id);
     int getTmRetreats();
 
     int getTmCheckings();

@@ -13,6 +13,4 @@ public class Place {
     private String placeId;
     private String placeName;
 
-    @OneToMany
-    private List<MeditationRecord> meditationRecords;
 }

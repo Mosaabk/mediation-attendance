@@ -13,12 +13,16 @@ public class AdminController {
 
     @GetMapping("/")
     public String getAdminPage(){
-        return "adminRetreat";
+
+        //return "adminRetreat";
+
+        return "admin";
+
     }
 
     @GetMapping("/adminTmchecking")
     public String getTmForm(){
-        return "tmForm";
+        return "admin";
     }
 
     @PostMapping("/add/tmChecking")

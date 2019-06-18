@@ -1,6 +1,5 @@
 package com.waa.dragons.mediationattendance.controller.admin;
 
-import com.waa.dragons.mediationattendance.domain.Attendance;
 import com.waa.dragons.mediationattendance.service.AttendanceService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.batch.core.Job;

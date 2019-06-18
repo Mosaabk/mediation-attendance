@@ -1,6 +1,10 @@
 package com.waa.dragons.mediationattendance.service.impl;
+<<<<<<< HEAD:src/main/java/com/waa/dragons/mediationattendance/service/impl/AttendanceServiceImpl.java
 import com.waa.dragons.mediationattendance.domain.Block;
 import com.waa.dragons.mediationattendance.domain.Student;
+=======
+
+>>>>>>> 1a9eb7e425d73ea27c783219fda16353a959ae75:src/main/java/com/waa/dragons/mediationattendance/service/impl/AttendanceResponseServiceImpl.java
 import com.waa.dragons.mediationattendance.repository.AttendanceRepository;
 import com.waa.dragons.mediationattendance.domain.Attendance;
 
@@ -12,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AttendanceServiceImpl implements AttendanceService {
+public class AttendanceResponseServiceImpl implements AttendanceService {
 
 
     @Autowired
@@ -24,9 +28,11 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
 
+
+
     @Override
     public Attendance save(Attendance attendance) {
-        return attendanceRepository.save(attendance);
+        return null;
     }
 
     @Override
