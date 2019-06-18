@@ -13,11 +13,16 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
 
+
+    @Override
+    public Student findStudentByStudentId(String studentId) {
+        return studentRepository.findStudentByStudentId(studentId);
+    }
+
+
     @Override
     public Student getById(Integer id) {
-        return studentRepository.getOne(id);
-
-
+        return null;
     }
 
     @Override
@@ -37,7 +42,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student findStudentByBarCode(String barCode) {
-        return null;
+        return studentRepository.findStudentByBarCode(barCode);
     }
 
 }
