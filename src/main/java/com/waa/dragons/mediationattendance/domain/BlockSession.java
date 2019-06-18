@@ -4,29 +4,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
+@Entity
 @Data
 @NoArgsConstructor
-@Entity
-public class Attendance {
+public class BlockSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
-    @ManyToOne
-    private Student student;
-
-    private LocalDate date;
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "block_id")
     private Block block;
+    private Date session;
 
-    @ManyToOne
-    private Place place;
-
-
-    private String type;
 
 }

@@ -13,25 +13,20 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
 
-    public Student getByID(Integer id) {
-        // TODO Auto-generated method stub
+    @Override
+    public Student getById(Integer id) {
         return studentRepository.getOne(id);
-    }
 
-    public Student findStudentByBarCode(String barCode){
-        return studentRepository.findStudentByBarCode(barCode);
-    }
 
+    }
 
     @Override
-    public int getTmRetreats()
-    {
+    public int getTmRetreats() {
         return 0;
     }
 
     @Override
-    public int getTmCheckings()
-    {
+    public int getTmCheckings() {
         return 0;
     }
 
@@ -39,4 +34,10 @@ public class StudentServiceImpl implements StudentService {
     public int getHowManyDaysLeft() {
         return 0;
     }
+
+    @Override
+    public Student findStudentByBarCode(String barCode) {
+        return null;
+    }
+
 }

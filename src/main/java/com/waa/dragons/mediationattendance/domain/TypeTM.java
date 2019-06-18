@@ -18,7 +18,5 @@ public class TypeTM {
     private String startTime;
     private String endTime;
 
-    @OneToMany(mappedBy = "typeTM", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<MeditationRecord> meditationRecords;
 
 }
