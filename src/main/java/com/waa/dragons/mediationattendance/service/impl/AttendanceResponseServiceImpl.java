@@ -1,10 +1,6 @@
 package com.waa.dragons.mediationattendance.service.impl;
-<<<<<<< HEAD:src/main/java/com/waa/dragons/mediationattendance/service/impl/AttendanceServiceImpl.java
 import com.waa.dragons.mediationattendance.domain.Block;
 import com.waa.dragons.mediationattendance.domain.Student;
-=======
-
->>>>>>> 1a9eb7e425d73ea27c783219fda16353a959ae75:src/main/java/com/waa/dragons/mediationattendance/service/impl/AttendanceResponseServiceImpl.java
 import com.waa.dragons.mediationattendance.repository.AttendanceRepository;
 import com.waa.dragons.mediationattendance.domain.Attendance;
 

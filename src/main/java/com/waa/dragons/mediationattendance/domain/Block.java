@@ -10,8 +10,6 @@ import java.util.Set;
 @Entity
 @Data
 public class Block {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

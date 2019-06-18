@@ -13,8 +13,8 @@
 </ul>
 <form>
     <label>Block</label>
-    <select name="rank">
-    <option th:each=" rr:${blocks}" th:value="${rr.blockName}" th:text="${rr.blockName}"></option>
+    <select th:each=" rr:${blocks}">
+    <option  th:value="${rr.blockName}" th:text="${rr.blockName}"></option>
 </select>
 </form>
 
@@ -22,15 +22,6 @@
 
 
 
-<!--<h1 th:text="'Attendance for ' + ${stu.firstName} + ' ' + ${stu.lastName}"></h1>
-<ul th:each="attend : ${attendances}">
-    <li th:text="${attend.date} + ' - ' + ${attend.block} + ' - ' +${attend.place}"></li>
-</ul>
 
-
-<h1 th:text="'Attendance for ' + ${stu.firstName} + ' ' + ${stu.lastName}"></h1>
-<ul th:each="attend : ${attendances}">
-    <li th:text="${attend.date} + ' - ' + ${attend.block} + ' - ' +${attend.place}"></li>
-</ul>-->
 </body>
 </html>

@@ -13,22 +13,19 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
 
-<<<<<<< HEAD
     public double getTotalPercentage() {
 
         return 0;
     }
 
-=======
+
     @Override
     public Student getById(Integer id) {
-        return studentRepository.getOne(id);
-
-
+        return null;
     }
 
->>>>>>> 1a9eb7e425d73ea27c783219fda16353a959ae75
     @Override
+
     public int getTmRetreats() {
         return 0;
     }
@@ -44,31 +41,22 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-<<<<<<< HEAD
+
     public Student getById(int id) {
         return null;
     }
 
     @Override
     public Student findStudentByStudentId(String studentId) {
-      return studentRepository.findStudentByStudentId(studentId);
+        return studentRepository.findStudentByStudentId(studentId);
     }
 
-    public Student findStudentByBarCode(String barCode){
+    public Student findStudentByBarCode(String barCode) {
         return studentRepository.findStudentByBarCode(barCode);
 
     }
 
-    public Student findStudentByStudentId(Long studentId){
-        return null;
-    }
 
 
 
-=======
-    public Student findStudentByBarCode(String barCode) {
-        return null;
-    }
-
->>>>>>> 1a9eb7e425d73ea27c783219fda16353a959ae75
 }

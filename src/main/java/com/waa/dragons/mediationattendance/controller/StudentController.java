@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/student")
@@ -56,9 +57,14 @@ public class StudentController {
     }
         @GetMapping("/{stuId}")
         public String getBlock(@PathVariable("stuId")String studentId,Model model){
-        Student stu=studentService.findStudentByStudentId(studentId);
+         Student stu=studentService.findStudentByStudentId(studentId);
          model.addAttribute("blocks",blockService.getAll());
+         System.out.println(stu.getFirstName());
          model.addAttribute("stu",stu);
         return "attendanceList";
         }
+//        @GetMapping("/{blockName}")
+//    public @ResponseBody StudentController studentReport(@PathVariable("blockName") String blockName, Model model){
+//
+//        }
 }
