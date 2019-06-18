@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class StudentServiceImpl implements StudentService {
 @Autowired
     StudentRepository studentRepository;
-    @Override
+
     public double getTotalPercentage() {
         return 0;
     }
