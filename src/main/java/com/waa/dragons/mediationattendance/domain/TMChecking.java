@@ -19,6 +19,8 @@ public class TMChecking {
     private Date date;
     @NotNull
     private String teacher;
+    @ManyToOne
+    private  Student student;
 
 
 

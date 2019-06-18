@@ -27,7 +27,8 @@ public class TMCheckingController {
     @GetMapping("/addTMChecking")
     public String getForm(@ModelAttribute("tMChecking") TMChecking tmChecking, Model model){
 
-        return "TMCheckingForm";
+//        return "TMCheckingForm";
+        return "TMChecking";
     }
 
     @PostMapping("/addTMChecking")

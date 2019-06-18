@@ -15,5 +15,7 @@ public class TMRetreat {
     private int id;
     @Temporal(TemporalType.DATE)
     private Date date;
+    @ManyToOne
+    private  Student student;
 
 }
