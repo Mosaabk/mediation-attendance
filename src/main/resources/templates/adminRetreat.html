@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Mirrored from followtechnique.com/themes/bird_v1/theme/ by HTTrack Website Copier/3.x [XR&CO'2010], Wed, 13 Jul 2016 20:15:11 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TM Meditation</title>
+	<link th:href="@{/assets/images/favicon.ico}" rel="apple-touch-icon" type="image/png" sizes="144x144">
+	<link th:href="@{/assets/images/favicon.ico}" rel="apple-touch-icon" type="image/png" sizes="114x114">
+	<link th:href="@{/assets/images/favicon.ico}" rel="apple-touch-icon" type="image/png" sizes="72x72">
+	<link th:href="@{/assets/images/favicon.ico}" rel="apple-touch-icon" type="image/png">
+	<link th:href="@{/assets/images/favicon.ico}" rel="icon" type="image/png">
+	<link th:href="@{/assets/images/favicon.ico}" rel="shortcut icon">
+
+
+	<link th:href="@{/fonts/fonts.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/animate.min.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/bootstrap-extended.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/plugins.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/color-system.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/media.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/assets/weather/weather-icons.min.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/assets/weather/weather-icons-wind.min.css}" rel="stylesheet" type="text/css">
+
+	<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
+
+<script th:src="@{/ajax/ajax.js}"></script>
+
+	<script th:src="@{/js/maps/google/markers/symbols_custom.js}"></script>
+</head>
+<body>
+
+<!-- Main navbar -->
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-header">
+		<a class="sidebar-mobile-toggle visible-xs"><i class="fa fa-ellipsis-v"></i></a>
+		<a class="navbar-brand" href="index.htm"></a>
+		<a class="sidebar-control sidebar-toggle hidden-xs pull-right"><i class="fa fa-bars"></i></a>
+	</div>
+	<ul class="navbar-right">
+		<li class="dropdown clearfix">
+			<a class="dropdown-toggle" id="settings" data-toggle="dropdown" aria-expanded="false"> <i class="fa fa-cog"></i></a>
+			<ul class="dropdown-menu dropdown-menu-themes" aria-labelledby="settings">
+				<li class="dropdown-header">Styles</li>
+				<ul class="clearfix">
+					<li class="color-option style dark" data-popup="tooltip" title="Dark Theme" theme="dark"></li>
+					<li class="color-option style light" data-popup="tooltip" title="Light Theme" theme="light"></li>
+					<li class="color-option style default" data-popup="tooltip" title="Default Theme" theme=""></li>
+				</ul>
+				<li role="separator" class="divider"></li>
+				<li class="dropdown-header">Themes</li>
+				<ul class="clearfix">
+					<li class="color-option theme pink" data-popup="tooltip" title="Pink" theme="pink"></li>
+					<li class="color-option theme purple" data-popup="tooltip" title="Purple" theme="purple"></li>
+					<li class="color-option theme indigo" data-popup="tooltip" title="Indigo" theme="indigo"></li>
+					<li class="color-option theme blue" data-popup="tooltip" title="Blue" theme="blue"></li>
+					<li class="color-option theme teal" data-popup="tooltip" title="Teal" theme="teal"></li>
+					<li class="color-option theme lime" data-popup="tooltip" title="Lime" theme="lime"></li>
+					<li class="color-option theme amber" data-popup="tooltip" title="Amber" theme="amber"></li>
+					<li class="color-option theme brown" data-popup="tooltip" title="Brown" theme="brown"></li>
+					<li class="color-option theme slate" data-popup="tooltip" title="Slate" theme="slate"></li>
+					<li class="color-option theme grey" data-popup="tooltip" title="Grey" theme="grey"></li>
+					<li class="color-option theme default" data-popup="tooltip" title="Default" theme=""></li>
+				</ul>
+			</ul>
+		</li>
+		<li class="dropdown notifications">
+			<a class="dropdown-toggle" data-toggle="dropdown">
+				<i class="fa fa-bell"></i>
+				<span class="badge badge-info"></span>
+			</a>
+			<div class="dropdown-menu">
+				<ul class="media-list media-list-linked">
+
+				</ul>
+				<div class="dropdown-content-footer">
+					<a href="index.htm#" data-popup="tooltip" title="All messages"><i class="fa fa-comments position-left"></i> Read all notifications</a>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>
+<!-- /main navbar -->
+
+<!-- Main navbar -->
+
+
+<!-- Page container -->
+<div class="page-container" style="min-height:700px">
+
+
+	<!-- /page content -->
+<div class="page-content"><!-- Main sidebar -->
+	<div class="sidebar sidebar-main hidden-xs">
+		<div class="sidebar-content">
+
+			<!-- User menu -->
+			<div class="sidebar-user">
+				<div class="category-content">
+					<div class="media">
+						<a href="index.htm#" class="media-left"><img src="assets/images/users/user6.png" class="img-circle img-sm" alt=""></a>
+						<div class="media-body">
+							<span class="media-heading text-semibold">Andrew Brewer</span>
+							<div class="text-size-mini text-muted">
+								Network engineer
+							</div>
+						</div>
+
+						<div class="media-right media-middle">
+							<ul class="icons-list">
+								<li>
+									<a href="login_simple.htm"><i class="fa fa-sign-out"></i></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /user menu -->
+
+			<!-- Main navigation -->
+			<div class="sidebar-category sidebar-category-visible">
+				<div class="category-content no-padding">
+					<ul class="navigation navigation-main navigation-accordion">
+
+						<!-- Main -->
+						<li class="active">
+							<a href="index.htm"><i class="fa fa-desktop"></i> <span>User</span></a>
+						</li>
+						<li class="active">
+							<a href="/TMChecking/addTMChecking"><i class="fa fa-desktop"></i> <span>TM Checking</span></a>
+							<!--<button id="tmbtn" class="fa fa-desktop"> <span> TM Checking </span></button>-->
+
+						</li>
+
+						<li class="active">
+							<a href="index.htm"><i class="fa fa-desktop"></i> <span>TM Retreat</span></a>
+						</li>
+						<li class="active">
+							<a href="index.htm"><i class="fa fa-desktop"></i> <span>TM Schedule</span></a>
+						</li>
+						<li class="active">
+							<a href="index.htm"><i class="fa fa-desktop"></i> <span>Report</span></a>
+						</li>
+						<!-- /Main -->
+					</ul>
+				</div>
+			</div>
+			<!-- /main navigation -->
+
+		</div>
+	</div>
+	<!-- /main sidebar -->
+	<!-- Main content -->
+	<div class="content-wrapper">
+
+		<!-- Page header -->
+		<div class="page-header">
+			<div class="page-header-content">
+				<div class="page-title">
+					<h4><i class="fa fa-home position-left"></i> <span>Dashboard</span></h4>
+				</div>
+				<ul class="breadcrumb">
+					<li><a href="index.htm"><i class="fa fa-home"></i>Home</a></li>
+					<li class="active">Dashboard</li>
+				</ul>
+			</div>
+		</div>
+		<!-- /page header -->
+
+
+		<div id="content"> </div>
+
+		<!-- Content area -->
+
+		<!-- /content area -->
+
+	</div>
+	<!-- /main content -->
+
+</div>
+
+
+</div>
+<!-- /page container -->
+<!--<form th:method="post" th:action="@{/retreat/addRetreat}" th:object="${tmRetreat}" >
+
+	<label >Enter retreate Date:</label>
+	<input type="text"  th:field="*{date}" />
+	<input type="submit"  value="AddRetreat"/>
+</form>-->
+
+</body>
+
+<!-- Mirrored from followtechnique.com/themes/bird_v1/theme/ by HTTrack Website Copier/3.x [XR&CO'2010], Wed, 13 Jul 2016 20:19:49 GMT -->
+</html>
