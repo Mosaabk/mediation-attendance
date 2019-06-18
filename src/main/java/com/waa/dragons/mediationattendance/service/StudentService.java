@@ -1,5 +1,7 @@
 package com.waa.dragons.mediationattendance.service;
 
+import com.waa.dragons.mediationattendance.domain.Student;
+
 public interface StudentService {
 
 
@@ -9,6 +11,10 @@ public interface StudentService {
     int getTmCheckings();
 
     int getHowManyDaysLeft();
+
+
+    Student findStudentByBarCode(String barCode);
+
 
 
 }

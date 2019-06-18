@@ -56,10 +56,8 @@ public class FileUploadController {
 
 
         JobExecution jobExecution = jobLauncher.run(importUserJob, new JobParametersBuilder()
-                .addString("fullPathFileName", fileToImport.getAbsolutePath())
+                .addString("fileName", multipartFile.getOriginalFilename())
                 .toJobParameters());
-
-
 
 
         return "dataForm";

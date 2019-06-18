@@ -22,16 +22,22 @@ import java.util.Date;
 public class Attendance {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
 
-    private Long barCode;
+    @ManyToOne
+    private Student student;
 
-    @Temporal(TemporalType.DATE)
-    private Date date;
+    private LocalDate date;
 
-    private String location;
+    @ManyToOne
+    private Block block;
+
+    @ManyToOne
+    private Place place;
+
+
 
     private String type;
 

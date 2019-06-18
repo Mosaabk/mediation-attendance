@@ -18,6 +18,9 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.getOne(id);
     }
 
+    public Student findStudentByBarCode(String barCode){
+        return studentRepository.findStudentByBarCode(barCode);
+    }
 
 
     @Override
