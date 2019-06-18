@@ -32,4 +32,5 @@ public class AttendanceResponseServiceImpl implements AttendanceService {
     public List<Attendance> saveAll(List<Attendance> attendances) {
         return null;
     }
+
 }

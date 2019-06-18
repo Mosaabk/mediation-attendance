@@ -17,6 +17,13 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.getOne(id);
     }
 
+    public Student getByID(Integer id) {
+        // TODO Auto-generated method stub
+        return studentRepository.getOne(id);
+    }
+
+
+
     @Override
     public int getTmRetreats()
     {
