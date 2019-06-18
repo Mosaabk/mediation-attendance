@@ -18,6 +18,11 @@ public class AttendanceResponseServiceImpl implements AttendanceService {
     private AttendanceRepository attendanceRepository;
 
     @Override
+    public Attendance findAttendanceByID(Long id) {
+        return attendanceRepository.findById(id).get();
+    }
+
+    @Override
     public double getTotalAttendancePercentage() {
         return 0;
     }
