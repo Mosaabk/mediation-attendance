@@ -30,7 +30,4 @@ public class EntryServiceImpl implements EntryService {
         return entryRepository.findAll();
     }
 
-    public String test() {
-        return null;
-    }
 }
