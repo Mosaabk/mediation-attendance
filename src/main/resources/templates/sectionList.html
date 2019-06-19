@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Section List</title>
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+
+
+<table>
+    <tr>
+        <th>Section</th>
+        <th>Student</th>
+    </tr>
+    <tr th:each="sec : ${sections}">
+        <td th:text="${sec.block.getBlockName()}"></td>
+        <td th:text="${sec.getStudentList()}"></td>
+    </tr>
+
+</table>
+</body>
+</html>
