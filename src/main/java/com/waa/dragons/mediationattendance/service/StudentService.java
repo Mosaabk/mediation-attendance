@@ -15,9 +15,7 @@ public interface StudentService {
 
     int getHowManyDaysLeft();
 
-
     Student findStudentByBarCode(String barCode);
-
 
     Student findStudentByStudentId(String studentId);
 

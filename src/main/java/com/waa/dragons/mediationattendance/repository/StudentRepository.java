@@ -10,10 +10,11 @@ import java.util.List;
 @Repository
 public interface StudentRepository extends CrudRepository<Student,Long> {
 
+    List<Student> findStudentsByEntry(Entry entry);
+
     Student findStudentByBarCode(String barCode);
 
     Student findStudentByStudentId(String studentId);
 
-    List<Student> findStudentsByEntry(Entry entry);
 
 }
