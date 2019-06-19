@@ -28,11 +28,10 @@ public class BlockServiceImpl implements BlockService {
 
     }
 
-
-
-
-
-
+    public String test(){
+        return null;
+    }
+    
     @Override
     public List<Block> findAll() {
         return blockRepository.findAll();
