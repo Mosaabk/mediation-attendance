@@ -17,4 +17,7 @@ public interface BlockRepository extends CrudRepository<Block, Integer> {
     Optional<Block> findBlockByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate startDate, LocalDate endDate);
     List<Block> findAll();
     List<Block> findAllById(Integer blockId);
+
+
+
 }
