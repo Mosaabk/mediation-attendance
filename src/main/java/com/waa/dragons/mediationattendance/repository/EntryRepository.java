@@ -10,4 +10,5 @@ public interface EntryRepository extends CrudRepository<Entry, Integer> {
     Entry findById(int id);
     Entry findByName(String name);
     List<Entry> findAll();
+    String test();
 }

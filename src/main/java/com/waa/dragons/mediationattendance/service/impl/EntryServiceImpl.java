@@ -29,4 +29,8 @@ public class EntryServiceImpl implements EntryService {
     public List<Entry> findAll() {
         return entryRepository.findAll();
     }
+
+    public String test() {
+        return null;
+    }
 }
