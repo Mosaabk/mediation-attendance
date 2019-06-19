@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.swing.text.html.Option;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -14,4 +15,7 @@ public interface BlockRepository extends CrudRepository<Block, Integer> {
 
     Block findBlockByBlockName(String name);
     Optional<Block> findBlockByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate startDate, LocalDate endDate);
+    List<Block> findAll();
+    List<Block> findAllById(Integer blockId);
+
 }
