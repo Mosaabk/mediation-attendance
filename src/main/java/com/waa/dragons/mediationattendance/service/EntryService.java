@@ -9,6 +9,5 @@ public interface EntryService {
     Entry findById(int id);
     Entry findByName(String name);
     List<Entry> findAll();
-    String test();
 
 }
