@@ -15,7 +15,6 @@ public interface AttendanceService {
 
     List<Attendance> findEntryReport(String entry);
 
-
     List<Attendance> findAllByBlockIdAndEntryId(int blockId, int entryId);
     List<StudentBlockAttendanceReport> findAllByBlockIdAndEntryIdReport(int blockId, int entryId);
 

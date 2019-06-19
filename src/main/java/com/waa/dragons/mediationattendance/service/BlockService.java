@@ -1,6 +1,7 @@
 package com.waa.dragons.mediationattendance.service;
 
 import com.waa.dragons.mediationattendance.domain.Block;
+import com.waa.dragons.mediationattendance.domain.Section;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,4 +19,6 @@ public interface BlockService {
     Block findById(Integer blockId);
 
     List<Block> findAllById(Integer blockId);
+
+
 }

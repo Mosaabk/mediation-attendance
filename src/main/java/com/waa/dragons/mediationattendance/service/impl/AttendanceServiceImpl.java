@@ -110,12 +110,13 @@ public class AttendanceServiceImpl implements AttendanceService {
             studentBlockAttendancesReportReport.add(studentBlockAttendanceReport);
         }
 
-
-
-
-
         return studentBlockAttendancesReportReport;
     }
+
+    public int test(){
+        return 0;
+    }
+
     @Override
     public List<Attendance> findAllByBlockIdAndEntryId(int blockId, int entryId) {
         List<Student> students = studentService.findStudentsByEntry(entryService.findById(entryId));
