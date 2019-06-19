@@ -18,6 +18,4 @@ public interface BlockRepository extends CrudRepository<Block, Integer> {
     List<Block> findAll();
     List<Block> findAllById(Integer blockId);
 
-
-
 }
