@@ -4,7 +4,6 @@ package com.waa.dragons.mediationattendance.batch;
 import com.waa.dragons.mediationattendance.domain.Attendance;
 import com.waa.dragons.mediationattendance.domain.Block;
 import com.waa.dragons.mediationattendance.service.BlockService;
-import com.waa.dragons.mediationattendance.service.EntryService;
 import com.waa.dragons.mediationattendance.service.PlaceService;
 import com.waa.dragons.mediationattendance.service.StudentService;
 import org.springframework.batch.item.ItemProcessor;
@@ -15,8 +14,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Component
-public class DefaultAttendanceProcessor implements ItemProcessor<DefaultAttendance, Attendance> {
-
+public class SpecialAttendanceProcessor implements ItemProcessor<SpecialAttendance, Attendance> {
     @Autowired
     private StudentService studentService;
 
@@ -26,32 +24,25 @@ public class DefaultAttendanceProcessor implements ItemProcessor<DefaultAttendan
     @Autowired
     private PlaceService placeService;
 
-    @Autowired
-    private EntryService entryService;
-
 
     @Override
-    public Attendance process(DefaultAttendance defaultAttendance) throws Exception {
-
-
+    public Attendance process(SpecialAttendance specialAttendance) throws Exception {
         Attendance attendance = new Attendance();
 
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
-
-        attendance.setDate(LocalDate.parse(defaultAttendance.getDate(), formatter));
+        attendance.setDate(LocalDate.parse(specialAttendance.getDate(), formatter));
 
 
-        attendance.setStudent(studentService.findStudentByBarCode(defaultAttendance.getBarCode()));
+        attendance.setStudent(studentService.findStudentByStudentId(specialAttendance.getStudentId()));
 
-        attendance.setType(defaultAttendance.getType());
+        attendance.setType("AM");
 
-        attendance.setPlace(placeService.findByPlaceId(defaultAttendance.getLocation()));
+        attendance.setPlace(placeService.findByPlaceId("DB"));
 
         attendance.setBlock(blockService.findBlockByStartDateLessThanEqualAndEndDateGreaterThanEqual(attendance.getDate(),attendance.getDate()).orElse(new Block()));
 
         return attendance;
-
     }
 }

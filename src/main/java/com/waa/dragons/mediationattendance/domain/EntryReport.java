@@ -8,28 +8,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDate;
+import java.util.HashMap;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Block {
-
+public class EntryReport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
+
+    private String firstName;
+
+    private String lastName;
 
 
-    private LocalDate startDate;
-
-    private LocalDate endDate;
-
-    private String blockName;
-
-
-
+    private HashMap<String, StudentBlockAttendanceReport> blockAttendances;
 }
-
-

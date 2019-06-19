@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Entry Report</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+
+<h1>Attendance by entry</h1>
+
+
+
+<form th:action="@{/getEntryReport}">
+    <label>Select an Entry : </label>
+    <select th:name="entryId" >
+        <option value="0">Select an Entry</option>
+        <option  th:each="entry : ${entries}" th:value="${entry.id}" th:label="${entry.name}"></option>
+    </select>
+    <br>
+
+    <label>Select a Block :</label>
+    <select th:name="blockId">
+        <option value="0">Select a Block</option>
+        <option th:each="block : ${blocks}" th:label="${block.getBlockName()}" th:value="${block.getId()}"></option>
+    </select>
+
+    <br>
+    <input type="submit" value="Submit">
+
+</form>
+
+
+<table>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Date</th>
+    </tr>
+    <tr th:each="att : ${attendanceList}">
+        <td th:text="${att.getStudent().firstName}"></td>
+        <td th:text="${att.getStudent().lastName}"></td>
+        <td th:text="${att.date}"></td>
+    </tr>
+
+</table>
+
+<br><br>
+<br>
+
+
+
+
+<table>
+    <tr>
+        <th>Full Name</th>
+        <th>Days Present</th>
+        <th>Days Available</th>
+        <th>Attendance Percentage</th>
+        <th>Extra Points</th>
+    </tr>
+    <tr th:each="rep : ${report}">
+        <td th:text="${rep.studentName}"></td>
+        <td th:text="${rep.daysPresent}"></td>
+        <td th:text="${rep.daysAvailable}"></td>
+        <td th:text="${rep.attendancePercentage}"></td>
+        <td th:text="${rep.extraPoints}"></td>
+
+    </tr>
+
+</table>
+
+
+</body>
+</html>

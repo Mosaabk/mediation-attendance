@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,5 +26,20 @@ public class BlockServiceImpl implements BlockService {
     public Optional<Block> findBlockByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate startDate, LocalDate endDate) {
         return blockRepository.findBlockByStartDateLessThanEqualAndEndDateGreaterThanEqual(startDate,endDate);
 
+    }
+
+    @Override
+    public List<Block> findAll() {
+        return blockRepository.findAll();
+    }
+
+    @Override
+    public Block findById(Integer blockId) {
+        return blockRepository.findById(blockId).orElse(new Block());
+    }
+
+    @Override
+    public List<Block> findAllById(Integer blockId) {
+        return blockRepository.findAllById(blockId);
     }
 }

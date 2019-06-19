@@ -1,35 +1,31 @@
 package com.waa.dragons.mediationattendance.domain;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDate;
 
 @Entity
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-public class Block {
+public class FacultyReport {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
+    private String firstName;
 
-    private LocalDate startDate;
+    private String lastName;
 
-    private LocalDate endDate;
+    private int attendNum;
 
-    private String blockName;
+    private double percentage;
 
-
-
+    private double extraPoint;
 }
-
-

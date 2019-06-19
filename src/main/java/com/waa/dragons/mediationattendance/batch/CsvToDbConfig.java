@@ -3,6 +3,7 @@ package com.waa.dragons.mediationattendance.batch;
 import com.waa.dragons.mediationattendance.Config.DBLogProcessor;
 
 import com.waa.dragons.mediationattendance.domain.Attendance;
+import org.apache.catalina.Server;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -23,14 +24,14 @@ import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.context.annotation.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 
 @Configuration
 @EnableBatchProcessing
@@ -49,15 +50,26 @@ public class CsvToDbConfig {
     private ItemReader<DefaultAttendance> itemReader;
 
     @Autowired
+    private ItemReader<SpecialAttendance> itemReaderSpecial;
+
+    @Autowired
     private ItemProcessor<DefaultAttendance, Attendance> defaultItemProcessor;
+
+    @Autowired
+    private ItemProcessor<SpecialAttendance, Attendance> specialItemProcessor;
 
     @Autowired
     private ItemWriter<Attendance> itemWriter;
 
-
-    @Bean
+    @Primary
+    @Bean("attendanceJob")
     public Job attendanceJob(JobBuilderFactory jobBuilders, StepBuilderFactory stepBuilders){
         return jobBuilders.get("attendanceReadJob").start(attendanceReadStep()).build();
+    }
+
+    @Bean("attendanceJobSpecial")
+    public Job attendanceJobSpecial(JobBuilderFactory jobBuilders, StepBuilderFactory stepBuilders){
+        return jobBuilders.get("attendanceJobSpecial").start(attendanceReadStepSpecial()).build();
     }
 
     @Bean
@@ -66,15 +78,27 @@ public class CsvToDbConfig {
                 .<DefaultAttendance, Attendance>chunk(1000)
                 .reader(itemReader)
                 .processor(defaultItemProcessor)
-                .writer(itemWriter).build();
+                .writer(itemWriter)
+                .taskExecutor(taskExecutor())
+                .build();
     }
 
-//    @Bean
-//    public Step attendanceReadStepManual(){
-//        return stepBuilderFactory.get("attendanceReadStepManual")
-//                .<>
-//    }
+    @Bean
+    public Step attendanceReadStepSpecial(){
+        return stepBuilderFactory.get("attendanceReadStepSpecial")
+                .<SpecialAttendance,Attendance>chunk(10)
+                .reader(itemReaderSpecial)
+                .processor(specialItemProcessor)
+                .writer(itemWriter)
+                .build();
+    }
 
+    @Bean
+    public TaskExecutor taskExecutor() {
+        SimpleAsyncTaskExecutor taskExecutor = new SimpleAsyncTaskExecutor();
+        taskExecutor.setConcurrencyLimit(4);
+        return taskExecutor;
+    }
     @Bean
     @Scope(value = "step", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public FlatFileItemReader<DefaultAttendance> reader(@Value("#{jobParameters[fileName]}")
@@ -89,19 +113,19 @@ public class CsvToDbConfig {
     }
 
 
-//    @Bean
-//    public ItemProcessor<Attendance, Attendance> processor() {
-//        return new DBLogProcessor();
-//    }
+    @Bean
+    @Scope(value = "step", proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public FlatFileItemReader<SpecialAttendance> readerSpecial(@Value("#{jobParameters[fileName]}")
+                                                                String fileName){
 
-//    @Bean
-//    public JdbcBatchItemWriter<Attendance> writer(){
-//        return new JdbcBatchItemWriterBuilder<Attendance>()
-//                .dataSource(dataSource)
-//                .sql("INSERT INTO ATTENDANCE (BAR_CODE, DATE, LOCATION, TYPE) VALUES (:barCode, :date, :location, :type)")
-//                .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Attendance>())
-//                .build();
-//    }
+        return new FlatFileItemReaderBuilder<SpecialAttendance>()
+                .name("attendanceReaderSpecial")
+                .resource(new ClassPathResource("tmp/specialAttend.csv"))
+                .delimited().names(new String[] {"date", "studentId","stuName"})
+                .targetType(SpecialAttendance.class).build();
+
+    }
+
 
     @Bean
     public LineMapper<Attendance> lineMapper() {
@@ -115,6 +139,10 @@ public class CsvToDbConfig {
         lineMapper.setFieldSetMapper(fieldSetMapper);
         return lineMapper;
     }
+
+
+
+
 
 
 }

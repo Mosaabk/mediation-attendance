@@ -12,6 +12,8 @@ import org.springframework.batch.core.repository.JobExecutionAlreadyRunningExcep
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,20 +33,25 @@ public class FileUploadController {
 
     private AttendanceService attendanceService;
 
-    private Job importUserJob;
+    @Qualifier("attendanceJob")
+    private Job importAttendanceJob;
+
+    @Qualifier("attendanceJobSpecial")
+    private Job importSpecialAttendanceJob;
 
 
     @Autowired
-    public FileUploadController(AttendanceService attendanceService, JobLauncher jobLauncher,Job job) {
+    public FileUploadController(AttendanceService attendanceService, JobLauncher jobLauncher,Job importAttendanceJob,Job importSpecialAttendanceJob) {
         this.attendanceService = attendanceService;
         this.jobLauncher = jobLauncher;
-        this.importUserJob = job;
+        this.importAttendanceJob = importAttendanceJob;
+        this.importSpecialAttendanceJob = importSpecialAttendanceJob;
     }
 
 
 
     @PostMapping("/admin/uploadData")
-    public String processFileUpload(@RequestParam("file") MultipartFile multipartFile) throws IOException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
+    public String processFileUpload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
 
 
         String path = new ClassPathResource("tmp/").getURL().getPath();
@@ -55,9 +62,17 @@ public class FileUploadController {
         outputStream.close();
 
 
-        JobExecution jobExecution = jobLauncher.run(importUserJob, new JobParametersBuilder()
-                .addString("fileName", multipartFile.getOriginalFilename())
-                .toJobParameters());
+        new Thread(()->{
+            try {
+                jobLauncher.run(importAttendanceJob, new JobParametersBuilder()
+                        .addString("fileName", multipartFile.getOriginalFilename())
+                        .toJobParameters()).getEndTime();
+            } catch (JobExecutionAlreadyRunningException ex){}
+            catch (JobRestartException ex){}
+            catch (JobInstanceAlreadyCompleteException ex){}
+            catch (JobParametersInvalidException ex){}
+        }).run();
+
 
 
         return "dataForm";
