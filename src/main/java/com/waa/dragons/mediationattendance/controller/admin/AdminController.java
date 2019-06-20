@@ -11,15 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
 
-    @GetMapping("/")
+    @GetMapping
     public String getAdminPage(){
+        System.out.println("admin");
         return "admin";
     }
 
 
     @GetMapping("/tmchecking")
     public String getTmForm(){
-        return "admin";
+        return "tmForm";
     }
 
     @PostMapping("/add/tmChecking")

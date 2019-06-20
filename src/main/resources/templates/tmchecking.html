@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/dashboard_layout}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>TM-Checking Page</title>
+
+
+</head>
+<body>
+
+
+
+<div class="col" layout:fragment="main-content">
+
+
+
+  <h1>Welcome <span th:text="${firstName}" th:remove="tag"></span></h1>
+<br>
+
+    <div class="content">
+
+
+<div class="row">
+        <div class="col-md-6 col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Add TM</h4>
+
+                </div>
+
+                <div class="panel-body">
+
+                    <form th:method="post" th:action="@{/TMChecking/addTMChecking}  " >
+                    <div class="input-group">
+                        <label th:for="date">Enter TMChecking Professor:</label>
+                     <input type="text" /> <br><br>
+                    </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            <input type="text" class="form-control daterange-datemenu" value="04/18/2019 - 05/18/2019">
+                        </div>
+                        <br>
+                    <input type="submit"  value="Add TM Checking"/>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+<div class="row">
+        <div class="col-md-6 col-sm-6">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Delete TM</h4>
+
+                </div>
+
+                <div class="panel-body">
+
+                    <form th:method="post"   >
+                    <label for="date">Enter TMChecking ID:</label>
+                    <input type="text"   id="date"/> <br>
+
+
+
+                    <input type="submit"  value="Delete "/>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+
+    </div>
+
+
+</div>
+
+</body>
+</html>
