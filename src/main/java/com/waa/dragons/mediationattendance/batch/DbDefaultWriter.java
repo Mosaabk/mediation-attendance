@@ -2,7 +2,6 @@ package com.waa.dragons.mediationattendance.batch;
 
 
 import com.waa.dragons.mediationattendance.domain.Attendance;
-import com.waa.dragons.mediationattendance.repository.AttendanceRepository;
 import com.waa.dragons.mediationattendance.service.AttendanceService;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,10 @@ public class DbDefaultWriter implements ItemWriter<Attendance> {
 
     @Override
     public void write(List<? extends Attendance> attendances) throws Exception {
-        System.out.println("Insert INTO Attendance " + attendances);
+
+
         for(Attendance attendance : attendances){
+           if(attendance.getStudent() != null) System.out.println(attendance.getStudent().getFirstName());
             attendanceService.save(attendance);
         }
 

@@ -14,8 +14,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Component
-public class DefaultAttendanceProcessor implements ItemProcessor<DefaultAttendance, Attendance> {
-
+public class SpecialAttendanceProcessor implements ItemProcessor<SpecialAttendance, Attendance> {
     @Autowired
     private StudentService studentService;
 
@@ -27,24 +26,23 @@ public class DefaultAttendanceProcessor implements ItemProcessor<DefaultAttendan
 
 
     @Override
-    public Attendance process(DefaultAttendance defaultAttendance) throws Exception {
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
-
+    public Attendance process(SpecialAttendance specialAttendance) throws Exception {
         Attendance attendance = new Attendance();
 
-        attendance.setDate(LocalDate.parse(defaultAttendance.getDate(), formatter));
 
-        attendance.setStudent(studentService.findStudentByBarCode(defaultAttendance.getBarCode()));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
-        attendance.setType(defaultAttendance.getType());
+        attendance.setDate(LocalDate.parse(specialAttendance.getDate(), formatter));
 
-        attendance.setPlace(placeService.findByPlaceId(defaultAttendance.getLocation()));
+
+        attendance.setStudent(studentService.findStudentByStudentId(specialAttendance.getStudentId()));
+
+        attendance.setType("AM");
+
+        attendance.setPlace(placeService.findByPlaceId("DB"));
 
         attendance.setBlock(blockService.findBlockByStartDateLessThanEqualAndEndDateGreaterThanEqual(attendance.getDate(),attendance.getDate()).orElse(new Block()));
 
-
         return attendance;
-
     }
 }

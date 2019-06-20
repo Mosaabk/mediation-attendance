@@ -16,19 +16,13 @@ public class Block {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToMany(mappedBy = "block")
-    private List<BlockSession> blockSession;
-
     private LocalDate startDate;
 
     private LocalDate endDate;
 
     private String blockName;
 
-    @ManyToMany
-    private List<Faculty> faculties;
-
-
+    private int blockDays;
 
 }
 

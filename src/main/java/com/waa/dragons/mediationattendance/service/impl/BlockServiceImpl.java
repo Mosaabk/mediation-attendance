@@ -17,6 +17,10 @@ public class BlockServiceImpl implements BlockService {
     BlockRepository blockRepository;
 
 
+    @Override
+    public Block findBlockByBlockName(String name) {
+        return blockRepository.findBlockByBlockName(name);
+    }
 
 //    @Override
 //    public Optional<Block> findBlockByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate startDate, LocalDate endDate) {
@@ -29,11 +33,22 @@ public class BlockServiceImpl implements BlockService {
         return Optional.empty();
     }
 
+    public String test(){
+        return null;
+    }
+
     @Override
-    public List<Block> findallBlocks() {
+    public List<Block> findAll() {
+        return blockRepository.findAll();
+    }
 
-        return (List<Block>)blockRepository.findAll();
+    @Override
+    public Block findById(Integer blockId) {
+        return blockRepository.findById(blockId).orElse(new Block());
+    }
 
-
+    @Override
+    public List<Block> findAllById(Integer blockId) {
+        return blockRepository.findAllById(blockId);
     }
 }

@@ -23,6 +23,10 @@ public class AdminController {
     }
 
 
+    @GetMapping("/tmchecking")
+    public String getTmForm(){
+        return "admin";
+    }
 
     @PostMapping("/add/tmChecking")
     public String proccessTmForm(){

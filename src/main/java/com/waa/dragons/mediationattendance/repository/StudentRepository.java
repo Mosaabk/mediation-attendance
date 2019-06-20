@@ -1,12 +1,20 @@
 package com.waa.dragons.mediationattendance.repository;
 
+import com.waa.dragons.mediationattendance.domain.Entry;
 import com.waa.dragons.mediationattendance.domain.Student;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface StudentRepository extends CrudRepository<Student,Integer> {
+import java.util.List;
 
-    Student getOne(Integer id);
+@Repository
+public interface StudentRepository extends CrudRepository<Student,Long> {
+
+    List<Student> findStudentsByEntry(Entry entry);
+
     Student findStudentByBarCode(String barCode);
+
+    Student findStudentByStudentId(String studentId);
+
+
 }

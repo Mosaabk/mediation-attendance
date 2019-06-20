@@ -55,9 +55,6 @@ public class CsvToDbConfig {
     private ItemWriter<Attendance> itemWriter;
 
 
-
-
-
     @Bean
     public Job attendanceJob(JobBuilderFactory jobBuilders, StepBuilderFactory stepBuilders){
         return jobBuilders.get("attendanceReadJob").start(attendanceReadStep()).build();

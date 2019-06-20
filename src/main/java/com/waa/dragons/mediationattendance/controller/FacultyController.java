@@ -68,7 +68,7 @@ public class FacultyController {
     @RequestMapping(value = "/faculty/{id}")
 public String facultyCourseList(@PathVariable("id") Faculty faculty, Model model) {
 
-    List<Block> blocks = blockService.findallBlocks();
+    List<Block> blocks = blockService.findAll();
 
 
     model.addAttribute("blockList", blocks);
