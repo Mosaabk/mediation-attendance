@@ -9,11 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/faculty")
@@ -30,12 +28,33 @@ public class FacultyController {
     @Autowired
     private AttendanceService attendanceService;
 
+    @Autowired
+    private EntryService entryService;
+
 
 
     @GetMapping("/report")
-    public String getTmForm(Model model) {
+    public String getTmForm(Model model, @RequestParam(value = "entryId",required = false) Integer entryId,
+                            @RequestParam(value = "blockId", required = false) Integer blockId){
+        model.addAttribute("entries", entryService.findAll());
 
-        Map<String, List<Integer>> students = new HashMap<>();
+        if(entryId != null){
+            List<Attendance> attendances = new ArrayList<>();
+            if(blockId != null){
+                model.addAttribute("report",attendanceService.findAllByBlockIdAndEntryIdReport(blockId, entryId));
+            } else {
+                attendances = attendanceService.findEntryReport(entryService.findById(entryId).getName());
+            }
+
+            model.addAttribute("attendanceList", attendances);
+
+        }
+        model.addAttribute("blocks", blockService.findAll());
+
+
+
+        model.addAttribute("firstName", "Tina");
+        /*Map<String, List<Integer>> students = new HashMap<>();
 
         students.put("Abdu", Arrays.asList(22, 10, 12, 45));
         students.put("Selome", Arrays.asList(22, 22, 0, 100));
@@ -58,7 +77,6 @@ public class FacultyController {
 
 
 
-        model.addAttribute("firstName", "Tina");
 
 
         return "facultyReport";
@@ -72,7 +90,16 @@ public String facultyCourseList(@PathVariable("id") Faculty faculty, Model model
 
 
     model.addAttribute("blockList", blocks);
-    return "/facultyReport";
+*/
+
+        model.addAttribute("currentBlock", "July");
+        model.addAttribute("sessionInBlock", "22");
+        model.addAttribute("daysPresent", "21");
+        model.addAttribute("currentBlockPercentage", "92%");
+        model.addAttribute("bonusMark", "1.5");
+
+
+        return "facultyReport";
 }
 
 

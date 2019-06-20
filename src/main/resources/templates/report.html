@@ -5,24 +5,8 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>TM Retreat Page</title>
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
+    <title>Report -  Entry and Block</title>
 
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
 </head>
 <body>
 
@@ -35,43 +19,31 @@
     <div class="col-md-9 col-sm-9">
         <div class="panel panel-info">
             <div class="panel-heading">
-                <h4 class="panel-title">Attendance Summary</h4>
-
+                <h4 class="panel-title">Attendance by Block and Entry</h4>
             </div>
-
-
-
 
             <div class="panel-body">
                 <div class="form-group">
-
-
                     <form th:action="@{/getEntryReport}">
-                        <label class="control-label col-lg-3">Select an Entry :</label>
-                        <div class="col-lg-6">
+                        <label>Select an Entry : </label>
                         <select th:name="entryId" >
                             <option value="0">Select an Entry</option>
                             <option  th:each="entry : ${entries}" th:value="${entry.id}" th:label="${entry.name}"></option>
                         </select>
                         <br>
-                        </div>
-                        <label class="control-label col-lg-3">Select a Block :</label>
-                        <div class="col-lg-6">
 
+                        <label>Select a Block :</label>
                         <select th:name="blockId">
                             <option value="0">Select a Block</option>
                             <option th:each="block : ${blocks}" th:label="${block.getBlockName()}" th:value="${block.getId()}"></option>
                         </select>
-                        </div>
+
                         <br>
                         <input type="submit" value="Submit">
-                    </form>
 
+                    </form>
                 </div>
             </div>
-
-
-
 
 
             <div class="panel panel-flat">
@@ -86,25 +58,26 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Attained</th>
-                            <th>Expected</th>
-                            <th>Left</th>
-                            <th>Percentage</th>
+                            <th>Full Name</th>
+                            <th>Days Present</th>
+                            <th>Days Available</th>
+                            <th>Attendance Percentage</th>
+                            <th>Extra Points</th>
+                        </tr>
+
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="student, index: ${students}">
-                            <td th:text="${index.index+1}"></td>
-                            <td th:text="${student.getKey()}"></td>
-                            <td th:text="${student.getValue().get(0)}" ></td>
-                            <td th:text="${student.getValue().get(1)}"></td>
-                            <td th:text="${student.getValue().get(2)}"></td>
-                            <span th:switch="${student.getValue().get(3)} <'90'">
-                                    <td th:case="true" th:text="${student.getValue().get(3)}" class="text-danger text-bold" ></td>
-                                    <td th:case="false" th:text="${student.getValue().get(3)}"></td>
-                                </span>
 
+                        <tr th:each="rep, index : ${report}">
+                            <td th:text="${index.index+1}"></td>
+                            <td th:text="${rep.studentName}"></td>
+                            <td th:text="${rep.daysPresent}"></td>
+                            <td th:text="${rep.daysAvailable}"></td>
+                            <td th:text="${rep.attendancePercentage}"></td>
+                            <td th:text="${rep.extraPoints}"></td>
+
+                        </tr>
 
 
                         </tbody>
@@ -112,60 +85,12 @@
                 </div>
             </div>
 
-
-
-
-
         </div>
     </div>
+</div>
 
 
-
-
-
-    <!--===============================-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h1>Attendance by entry</h1>
-
-
-
-    <form th:action="@{/getEntryReport}">
-        <label>Select an Entry : </label>
-        <select th:name="entryId" >
-            <option value="0">Select an Entry</option>
-            <option  th:each="entry : ${entries}" th:value="${entry.id}" th:label="${entry.name}"></option>
-        </select>
-        <br>
-
-        <label>Select a Block :</label>
-        <select th:name="blockId">
-            <option value="0">Select a Block</option>
-            <option th:each="block : ${blocks}" th:label="${block.getBlockName()}" th:value="${block.getId()}"></option>
-        </select>
-
-        <br>
-        <input type="submit" value="Submit">
-
-    </form>
-
+<!--
 
     <table>
         <tr>
@@ -180,33 +105,7 @@
         </tr>
 
     </table>
+-->
 
-    <br><br>
-    <br>
-
-
-
-
-    <table>
-        <tr>
-            <th>Full Name</th>
-            <th>Days Present</th>
-            <th>Days Available</th>
-            <th>Attendance Percentage</th>
-            <th>Extra Points</th>
-        </tr>
-        <tr th:each="rep : ${report}">
-            <td th:text="${rep.studentName}"></td>
-            <td th:text="${rep.daysPresent}"></td>
-            <td th:text="${rep.daysAvailable}"></td>
-            <td th:text="${rep.attendancePercentage}"></td>
-            <td th:text="${rep.extraPoints}"></td>
-
-        </tr>
-
-    </table>
-
-
-</div>
 
 </body></html>
