@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +39,14 @@ public class Student {
 //    private LocalDate entry;
 
     @OneToMany(mappedBy = "student", cascade={CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Attendance> attendances;
 
+    private List<Attendance> attendances;
+    //add code
+
+    @OneToMany
+    private List<TMChecking> tmCheckings=new ArrayList<>();
+
+    @OneToMany
+    private List<TMRetreat>tmRetreats=new ArrayList<>();
 
 }

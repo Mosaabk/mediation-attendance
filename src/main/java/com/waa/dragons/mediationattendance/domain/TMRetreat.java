@@ -3,10 +3,7 @@ package com.waa.dragons.mediationattendance.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -19,6 +16,11 @@ public class TMRetreat {
     private int id;
 
     private LocalDate date;
+
+    //add code
+    @ManyToOne
+    private Student student;
+
 
 
 
