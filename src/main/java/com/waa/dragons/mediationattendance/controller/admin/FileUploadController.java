@@ -51,7 +51,7 @@ public class FileUploadController {
 
 
     @PostMapping("/admin/uploadData")
-    public String processFileUpload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+    public String processFileUpload(@RequestParam("file") MultipartFile multipartFile, @RequestParam(value = "typeCheck",required = false) boolean typeCheck) throws IOException {
 
 
         String path = new ClassPathResource("tmp/").getURL().getPath();
@@ -60,7 +60,6 @@ public class FileUploadController {
         IOUtils.copy(multipartFile.getInputStream(), outputStream);
         outputStream.flush();
         outputStream.close();
-
 
         new Thread(()->{
             try {
@@ -72,9 +71,7 @@ public class FileUploadController {
             catch (JobInstanceAlreadyCompleteException ex){}
             catch (JobParametersInvalidException ex){}
         }).run();
-
-
-
+        
         return "dataForm";
     }
 
