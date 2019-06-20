@@ -7,4 +7,6 @@ import java.util.List;
 public interface SectionService {
 
     List<Section> findAll();
+    List<Section> findAllByStudentList_studentId(String studentId);
+
 }

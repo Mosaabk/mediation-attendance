@@ -19,4 +19,9 @@ public class SectionServiceImpl implements SectionService {
     public List<Section> findAll() {
         return sectionRepository.findAll();
     }
+
+    @Override
+    public List<Section> findAllByStudentList_studentId(String studentId) {
+        return sectionRepository.findAllByStudentList_studentId(studentId);
+    }
 }

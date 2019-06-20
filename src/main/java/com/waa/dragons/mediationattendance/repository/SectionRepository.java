@@ -10,4 +10,5 @@ import java.util.List;
 public interface SectionRepository extends CrudRepository<Section, Long> {
 
     List<Section> findAll();
+    List<Section> findAllByStudentList_studentId(String studentId);
 }

@@ -14,5 +14,6 @@ import java.util.List;
 public interface AttendanceRepository extends CrudRepository<Attendance, Long> {
 
     List<Attendance> findAllByStudent(Student student);
-    List<Attendance> findAllByStudentAndAndBlock(Student student, Block block);
+    List<Attendance> findAllByStudentAndBlockOrderByDate(Student student, Block block);
+
 }
