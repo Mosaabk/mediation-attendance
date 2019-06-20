@@ -11,7 +11,7 @@
 
 <div class="col" layout:fragment="main-content">
 
-    <h4 class="panel-title">Welcome  <span th:text="${stu.getFirstName()}" th:remove="tag"></span>  </h4>
+    <h4 class="panel-title">Welcome  <span th:text="${firstName}" th:remove="tag"></span>  </h4>
 
     <div class="row">
         <div class="col-md-6 col-sm-6">
@@ -22,12 +22,12 @@
 
 
                 <div class="panel-body">
-                    <h3 >Total sessions possible: <span th:text="${stu.getAttendances()}"></span>  Days </h3>
-                    <h3 > Total sessions attended: <span th:text="${stu.getAttendances()}"></span>  Days</h3>
-                    <h3 > Percent attendance: <span th:text="${attendances.size()}">  </span> % </h3>
-                    <h3 > Remained attendance: <span th:text="${attendances.size()}"></span>   Days</h3>
+                    <h3 >Total sessions possible: <span th:text="${totalSessionsPossible}"></span>  Days </h3>
+                    <h3 > Total sessions attended: <span th:text="${totalSessionsAttainded}"></span>  Days</h3>
+                    <h3 > Percent attendance: <span th:text="${percentAttainded}">  </span> % </h3>
+                    <h3 > Remained attendance: <span th:text="${totalRemaining}"></span>   Days</h3>
 
-                    <h2 th:if="${attendances.size()} < '0'"> <span class="text-danger text-bold"> You better meditate!!!</span></h2>
+                    <h2 th:if="${totalRemaining} < '0'"> <span class="text-danger text-bold"> You better meditate!!!</span></h2>
                 </div>
             </div>
         </div>
@@ -41,11 +41,11 @@
 
 
                 <div class="panel-body">
-                    <h3 >Current Block: <span th:text="${blockAttendances.size()}"></span></h3>
-                    <h3 > Sessions in block: <span th:text="${blockAttendances.size()}"></span>  Days </h3>
-                    <h3 > Days present: <span th:text="${blockAttendances.size()}"></span>  Days</h3>
-                    <h3>Percentage attended:	<span th:text="${blockAttendances.size()}"></span>  %</h3>
-                    <h3>Extra credit points:	<span th:text="${blockAttendances.size()}"></span>  Points</h3>
+                    <h3 >Current Block: <span th:text="${currentBlock}"></span></h3>
+                    <h3 > Sessions in block: <span th:text="${sessionInBlock}"></span>  Days </h3>
+                    <h3 > Days present: <span th:text="${daysPresent}"></span>  Days</h3>
+                    <h3>Percentage attended:	<span th:text="${currentBlockPercentage}"></span>  %</h3>
+                    <h3>Extra credit points:	<span th:text="${bonusMark}"></span>  Points</h3>
                 </div>
             </div>
         </div>
@@ -108,7 +108,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="attendance, index: ${attendances}">
+                            <tr th:each="attendance, index: ${operators}">
                             <td th:text="${index.index+1}"></td>
                             <td th:text="${attendance}"></td>
                             <td th:text="True"></td></tr>
