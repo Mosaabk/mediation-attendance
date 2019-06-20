@@ -21,4 +21,7 @@ public class Faculty {
     @ManyToMany
     private List<Course> courses;
 
+    @ManyToMany
+    private List<Block> blocks;
+
 }

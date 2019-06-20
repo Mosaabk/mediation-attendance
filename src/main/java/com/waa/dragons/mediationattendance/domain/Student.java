@@ -40,5 +40,4 @@ public class Student {
     @OneToMany(mappedBy = "student", cascade={CascadeType.PERSIST, CascadeType.MERGE})
     private List<Attendance> attendances;
 
-
 }
