@@ -17,11 +17,8 @@ import java.util.Map;
 public class AdminController {
 
 
-<<<<<<< HEAD
-    @GetMapping
-=======
+
     @GetMapping("")
->>>>>>> semitti
     public String getAdminPage(){
         System.out.println("admin");
         return "admin";
