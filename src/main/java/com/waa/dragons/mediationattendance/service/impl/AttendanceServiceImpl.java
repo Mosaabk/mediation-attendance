@@ -31,6 +31,11 @@ public class AttendanceServiceImpl implements AttendanceService {
     private SectionService sectionService;
 
     @Override
+    public Attendance findAttendanceByID(Long id) {
+        return null;
+    }
+
+    @Override
     public double getTotalAttendancePercentage() {
         return 0;
     }

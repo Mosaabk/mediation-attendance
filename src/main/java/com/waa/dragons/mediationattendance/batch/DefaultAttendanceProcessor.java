@@ -42,7 +42,6 @@ public class DefaultAttendanceProcessor implements ItemProcessor<DefaultAttendan
         attendance.setPlace(placeService.findByPlaceId(defaultAttendance.getLocation()));
 
         attendance.setBlock(blockService.findBlockByStartDateLessThanEqualAndEndDateGreaterThanEqual(attendance.getDate(),attendance.getDate()).orElse(new Block()));
-        System.out.println(attendance);
 
 
         return attendance;

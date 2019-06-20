@@ -15,6 +15,7 @@ public interface BlockService {
 
     Optional<Block> findBlockByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate startDate, LocalDate endDate);
 
+
     List<Block> findAll();
 
     Block findById(Integer blockId);

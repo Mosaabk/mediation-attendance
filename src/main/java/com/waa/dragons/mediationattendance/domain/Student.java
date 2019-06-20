@@ -46,7 +46,10 @@ public class Student {
     @OneToMany
     private List<TMChecking> tmCheckings=new ArrayList<>();
 
+<<<<<<< HEAD
     @OneToMany
     private List<TMRetreat>tmRetreats=new ArrayList<>();
 
+=======
+>>>>>>> semitti
 }

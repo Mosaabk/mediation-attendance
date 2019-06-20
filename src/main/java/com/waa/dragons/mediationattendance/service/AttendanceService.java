@@ -10,6 +10,7 @@ import java.util.Map;
 
 public interface AttendanceService {
 
+    Attendance findAttendanceByID(Long id);
     double getTotalAttendancePercentage();
 
     Attendance save(Attendance attendance);

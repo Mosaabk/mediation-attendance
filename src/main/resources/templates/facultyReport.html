@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/dashboard_layout}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Faculty Page</title>
+</head>
+<body>
+
+
+
+<div class="col" layout:fragment="main-content">
+
+
+
+    <h4 class="panel-title">Welcome  <span th:text="${firstName}" th:remove="tag"></span>  </h4>
+<br>
+    <div class="row">
+        <div class="col-md-9 col-sm-9">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Select By Student ID</h4>
+                </div>
+                <div class="panel-body">
+<!--
+                    <div class="panel panel-flat">
+                        <div class="panel-body">-->
+                            <form class="form-horizontal" action="@{/student/">
+                                <fieldset>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-2">Enter Student ID</label>
+                                        <div class="col-lg-10">
+                                            <div class="row col-xs-4">
+                                                <input type="text" class="form-control" placeholder="student ID">
+                                            </div>
+                                            <div class=" col-xs-4">
+                                                <input type="submit" id="tmchecking" class="btn btn-success" value="Submit ">
+                                            </div>
+
+                                         </div>
+                                    </div>
+
+
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+<!--                    User Detail-->
+                    <div class="col-md-9 col-sm-9">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Attendance by Block and Entry</h4>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <form th:action="@{/faculty/report}">
+                                        <label>Select an Entry : </label>
+                                        <select th:name="entryId" >
+                                            <option value="0">Select an Entry</option>
+                                            <option  th:each="entry : ${entries}" th:value="${entry.id}" th:label="${entry.name}"></option>
+                                        </select>
+                                        <br>
+
+                                        <label>Select a Block :</label>
+                                        <select th:name="blockId">
+                                            <option value="0">Select a Block</option>
+                                            <option th:each="block : ${blocks}" th:label="${block.getBlockName()}" th:value="${block.getId()}"></option>
+                                        </select>
+
+                                        <br>
+                                        <input type="submit" value="Submit">
+
+                                    </form>
+                                </div>
+                            </div>
+
+
+                            <div class="panel panel-flat">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">May Block Report</h4>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Full Name</th>
+                                            <th>Days Present</th>
+                                            <th>Days Available</th>
+                                            <th>Attendance Percentage</th>
+                                            <th>Extra Points</th>
+                                        </tr>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="rep, index : ${report}">
+                                            <td th:text="${index.index+1}"></td>
+                                            <td th:text="${rep.studentName}"></td>
+                                            <td th:text="${rep.daysPresent}"></td>
+                                            <td th:text="${rep.daysAvailable}"></td>
+                                            <td th:text="${rep.attendancePercentage}"></td>
+                                            <td th:text="${rep.extraPoints}"></td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+</div>
+
+</body>
+</html>

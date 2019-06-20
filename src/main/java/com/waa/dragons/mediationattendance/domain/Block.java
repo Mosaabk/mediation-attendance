@@ -16,9 +16,6 @@ public class Block {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToMany(mappedBy = "block")
-    private List<BlockSession> blockSession;
-
     private LocalDate startDate;
 
     private LocalDate endDate;

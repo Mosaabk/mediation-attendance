@@ -4,10 +4,8 @@ package com.waa.dragons.mediationattendance.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,5 +17,11 @@ public class Faculty {
     private long id;
 
     private String name;
+
+    @ManyToMany
+    private List<Course> courses;
+
+    @ManyToMany
+    private List<Block> blocks;
 
 }

@@ -22,7 +22,7 @@ public class Section {
     @ManyToOne
     private Block block;
 
-    @ManyToOne
+    @OneToOne
     private Faculty faculty;
 
     @ManyToMany(mappedBy = "sections")
