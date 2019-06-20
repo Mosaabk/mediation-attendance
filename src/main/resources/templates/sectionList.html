@@ -25,17 +25,44 @@
 <body>
 
 
+<h1 th:text="'Attendance for student : ' + ${student.firstName} + ' ' + ${student.lastName}"></h1>
+
+
+<ul>
+    <li th:text="'Possible Total : ' + ${studentReport.totalSessionsPossible}"></li>
+    <li th:text="'Session Attended Total : '+${studentReport.totalSessionsAttended}"></li>
+    <li th:text="'TotalPercentage : ' + ${studentReport.totalAttendancePercentage}"></li>
+
+</ul>
+
+
+
+<select>
+    <option th:each="block : ${blocks}" th:value="${block.block.id}" th:label="${block.block.blockName}"></option>
+</select>
+
+
+
+<ul>
+    <li th:text="'Sessions in block : ' + ${stuBlockAttendReport.daysAvailable}"></li>
+    <li th:text="'Days present : ' + ${stuBlockAttendReport.daysPresent}" ></li>
+    <li th:text="'Percentage attended : ' + ${stuBlockAttendReport.attendancePercentage}"></li>
+    <li th:text="'Extra Credit points : ' + ${stuBlockAttendReport.extraPoints}" ></li>
+</ul>
 
 <table>
+
     <tr>
-        <th>Section</th>
-        <th>Student</th>
+        <th>Date </th>
+        <th>Present <th>
     </tr>
-    <tr th:each="sec : ${sections}">
-        <td th:text="${sec.block.getBlockName()}"></td>
-        <td th:text="${sec.getStudentList()}"></td>
+
+    <tr th:each="day : ${blockDays}">
+        <td th:text="${day.key}"></td>
+        <td th:text="${day.value}"></td>
     </tr>
 
 </table>
+
 </body>
 </html>

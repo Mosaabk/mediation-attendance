@@ -25,6 +25,8 @@ public class Block {
 
     private String blockName;
 
+    private int blockDays;
+
 }
 
 

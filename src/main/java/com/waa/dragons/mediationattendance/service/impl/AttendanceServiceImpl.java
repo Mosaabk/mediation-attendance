@@ -3,16 +3,13 @@ import com.waa.dragons.mediationattendance.domain.*;
 import com.waa.dragons.mediationattendance.repository.AttendanceRepository;
 
 import com.waa.dragons.mediationattendance.domain.Attendance;
-import com.waa.dragons.mediationattendance.service.AttendanceService;
-import com.waa.dragons.mediationattendance.service.BlockService;
-import com.waa.dragons.mediationattendance.service.EntryService;
-import com.waa.dragons.mediationattendance.service.StudentService;
+import com.waa.dragons.mediationattendance.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.*;
 
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
@@ -29,6 +26,9 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Autowired
     private BlockService blockService;
+
+    @Autowired
+    private SectionService sectionService;
 
     @Override
     public double getTotalAttendancePercentage() {
@@ -52,7 +52,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Override
     public List<Attendance> findAllByStudentAndAndBlock(Student student, Block block) {
-        return attendanceRepository.findAllByStudentAndAndBlock(student, block);
+        return attendanceRepository.findAllByStudentAndBlockOrderByDate(student, block);
     }
 
     @Override
@@ -96,25 +96,108 @@ public class AttendanceServiceImpl implements AttendanceService {
         List<Attendance> attendances = new ArrayList<>();
         List<StudentBlockAttendanceReport> studentBlockAttendancesReportReport = new ArrayList<>();
 
-
         for (Student student : students){
-            StudentBlockAttendanceReport studentBlockAttendanceReport = new StudentBlockAttendanceReport();
-            List<Attendance> attendanceList = attendanceRepository.findAllByStudentAndAndBlock(student, blockService.findById(blockId));
-            double percentage = (double) attendanceList.size() / 22;
-
-            studentBlockAttendanceReport.setDaysPresent(attendanceList.size());
-            studentBlockAttendanceReport.setDaysAvailable(22);
-            studentBlockAttendanceReport.setAttendancePercentage(percentage);
-            studentBlockAttendanceReport.setStudentName(student.getFirstName() + " " + student.getLastName());
-            studentBlockAttendanceReport.setExtraPoints(getExtraPointsByBlock(percentage));
-            studentBlockAttendancesReportReport.add(studentBlockAttendanceReport);
+            studentBlockAttendancesReportReport.add(getAttendanceByBlockReport(student, blockId));
         }
 
         return studentBlockAttendancesReportReport;
     }
 
-    public int test(){
-        return 0;
+
+    public int getDaysAvailableInBlock(List<Section> sections, int blockId){
+
+        for (Section section : sections ){
+            if(section.getBlock().getId() == blockId)
+                return section.getBlock().getBlockDays();
+        }
+
+        return 22;
+    }
+    @Override
+    public TotalStudentAttendanceReport findAllByStudentIdReport(String studentId) {
+
+        TotalStudentAttendanceReport report = new TotalStudentAttendanceReport();
+
+        List<Attendance> attendances = findAllByStudent(studentService.findStudentByStudentId(studentId));
+
+        report.setTotalSessionsAttended(attendances.size());
+
+        List<Section> sections = sectionService.findAllByStudentList_studentId(studentId);
+
+        int totalAttended = attendances.size();
+        int totalPossible = getTotalPossible(sections);
+
+        report.setTotalSessionsPossible(totalPossible);
+
+        report.setTotalAttendancePercentage((double) totalAttended / totalPossible);
+
+
+
+        return report;
+    }
+
+    @Override
+    public StudentBlockAttendanceReport getAttendanceByBlockReport(Student student, int blockId) {
+        StudentBlockAttendanceReport studentBlockAttendanceReport = new StudentBlockAttendanceReport();
+        List<Attendance> attendanceList = attendanceRepository.findAllByStudentAndBlockOrderByDate(student, blockService.findById(blockId));
+        int  daysAvailable  = getDaysAvailableInBlock(student.getSections(), blockId);
+        double percentage = (double) attendanceList.size() / daysAvailable;
+
+
+        studentBlockAttendanceReport.setDaysPresent(attendanceList.size());
+        studentBlockAttendanceReport.setDaysAvailable(daysAvailable);
+        studentBlockAttendanceReport.setAttendancePercentage(percentage);
+        studentBlockAttendanceReport.setStudentName(student.getFirstName() + " " + student.getLastName());
+        studentBlockAttendanceReport.setExtraPoints(getExtraPointsByBlock(percentage));
+
+        return studentBlockAttendanceReport;
+    }
+
+    @Override
+    public Map<LocalDate, Boolean> getAllBlockPresentDays(Student student,Block block) {
+        Map<LocalDate, Boolean> daysInBlock = new HashMap<>();
+
+        LocalDate startDate = block.getStartDate();
+        LocalDate endDate = startDate.plusDays(block.getBlockDays());
+        List<Attendance> attendanceList = attendanceRepository.findAllByStudentAndBlockOrderByDate(student, block);
+
+        System.out.println(startDate);
+        System.out.println(endDate);
+
+        int i = 0;
+        for (LocalDate date = startDate; date.isBefore(endDate); date = date.plusDays(1))
+        {
+
+
+            if( !(attendanceList.get(i).getDate().getDayOfWeek() == DayOfWeek.SUNDAY) && date.getDayOfWeek() != DayOfWeek.SUNDAY){
+                System.out.println("attendDay : " + attendanceList.get(i).getDate());
+                System.out.println(date);
+                if(date.equals(attendanceList.get(i).getDate())){
+                    daysInBlock.put(date, true);
+                    i++;
+                }
+                else
+                    daysInBlock.put(date, false);
+
+
+            }
+
+
+
+        }
+
+
+        return daysInBlock;
+
+    }
+
+    public int getTotalPossible(List<Section> sections){
+        int totalDays = 0;
+
+        for (Section section : sections)
+            totalDays +=  section.getBlock().getBlockDays();
+
+        return totalDays;
     }
 
     @Override
@@ -125,7 +208,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 
         for (Student student : students){
 
-            attendances.addAll(attendanceRepository.findAllByStudentAndAndBlock(student, blockService.findById(blockId)));
+            attendances.addAll(attendanceRepository.findAllByStudentAndBlockOrderByDate(student, blockService.findById(blockId)));
         }
 
 

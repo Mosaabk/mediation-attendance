@@ -14,6 +14,6 @@ public class TotalStudentAttendanceReport {
 
     private int totalSessionsPossible;
     private int totalSessionsAttended;
-    private int totalAttendancePercentage;
+    private double totalAttendancePercentage;
 
 }
