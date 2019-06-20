@@ -28,5 +28,6 @@ public interface AttendanceService {
 
     Map<LocalDate,Boolean> getAllBlockPresentDays(Student student, Block block);
 
+    List<Attendance> findAllById(Long id);
 
 }

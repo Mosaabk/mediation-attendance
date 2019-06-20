@@ -7,9 +7,12 @@ import com.waa.dragons.mediationattendance.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
+
+import static java.lang.Double.parseDouble;
 
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
@@ -82,12 +85,12 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     public double getExtraPointsByBlock(double percentage) {
+        double percent = 0.0;
+        if( percentage >= 0.9) percent= 1.5;
+        else if( percentage > 0.8) percent= 1.0;
+        else if( percentage > 0.7) percent= 0.5;
 
-        if( percentage >= 0.9) return 1.5;
-        else if( percentage > 0.8) return 1.0;
-        else if( percentage > 0.7) return 0.5;
-        else return 0.0;
-
+        return parseDouble(new DecimalFormat("##.##").format(percent));
     }
 
     @Override
@@ -129,7 +132,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 
         report.setTotalSessionsPossible(totalPossible);
 
-        report.setTotalAttendancePercentage((double) totalAttended / totalPossible);
+        report.setTotalAttendancePercentage(parseDouble(new DecimalFormat("##.##").format((double) totalAttended / totalPossible)));
 
 
 
@@ -141,7 +144,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         StudentBlockAttendanceReport studentBlockAttendanceReport = new StudentBlockAttendanceReport();
         List<Attendance> attendanceList = attendanceRepository.findAllByStudentAndBlockOrderByDate(student, blockService.findById(blockId));
         int  daysAvailable  = getDaysAvailableInBlock(student.getSections(), blockId);
-        double percentage = (double) attendanceList.size() / daysAvailable;
+        double percentage = parseDouble(new DecimalFormat("##.##").format((double) attendanceList.size() / daysAvailable));
 
 
         studentBlockAttendanceReport.setDaysPresent(attendanceList.size());
@@ -161,17 +164,16 @@ public class AttendanceServiceImpl implements AttendanceService {
         LocalDate endDate = startDate.plusDays(block.getBlockDays());
         List<Attendance> attendanceList = attendanceRepository.findAllByStudentAndBlockOrderByDate(student, block);
 
-        System.out.println(startDate);
-        System.out.println(endDate);
+        System.out.println("Size of  " + attendanceList.size());
 
         int i = 0;
         for (LocalDate date = startDate; date.isBefore(endDate); date = date.plusDays(1))
         {
 
+            System.out.println(date);
 
-            if( !(attendanceList.get(i).getDate().getDayOfWeek() == DayOfWeek.SUNDAY) && date.getDayOfWeek() != DayOfWeek.SUNDAY){
-                System.out.println("attendDay : " + attendanceList.get(i).getDate());
-                System.out.println(date);
+            if( !(attendanceList.get(i).getDate().getDayOfWeek() == DayOfWeek.SUNDAY) && date.getDayOfWeek() != DayOfWeek.SUNDAY && i < attendanceList.size() -1){
+
                 if(date.equals(attendanceList.get(i).getDate())){
                     daysInBlock.put(date, true);
                     i++;
@@ -179,9 +181,7 @@ public class AttendanceServiceImpl implements AttendanceService {
                 else
                     daysInBlock.put(date, false);
 
-
             }
-
 
 
         }
@@ -189,6 +189,11 @@ public class AttendanceServiceImpl implements AttendanceService {
 
         return daysInBlock;
 
+    }
+
+    @Override
+    public List<Attendance> findAllById(Long id) {
+        return attendanceRepository.findAllById(id);
     }
 
     public int getTotalPossible(List<Section> sections){
@@ -205,13 +210,10 @@ public class AttendanceServiceImpl implements AttendanceService {
         List<Student> students = studentService.findStudentsByEntry(entryService.findById(entryId));
         List<Attendance> attendances = new ArrayList<>();
 
-
         for (Student student : students){
 
             attendances.addAll(attendanceRepository.findAllByStudentAndBlockOrderByDate(student, blockService.findById(blockId)));
         }
-
-
 
 
         return attendances;
@@ -219,12 +221,5 @@ public class AttendanceServiceImpl implements AttendanceService {
 
 
 
-    public Double getAttendancePercentage(List<Attendance> attendancePerStudent){
-
-        // I need to get how many days available in the block(how many sessions available)
-
-
-        return 0.0;
-    }
 
 }

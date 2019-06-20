@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 body,html{height:100%;font-family:'open_sansregular';background:#e7eaeb;}
 a{cursor:pointer}
 ::-moz-selection {color: #fff;background: #483E55;}
@@ -481,7 +480,6 @@ i{min-width:16px;}
 @media (min-width:1400px){
 	.img-responsive{width:100%;}
 	.error_img.img-responsive{width:50%;}
-=======
 body,html{height:100%;font-family:'open_sansregular';background:#e7eaeb;}
 a{cursor:pointer}
 ::-moz-selection {color: #fff;background: #483E55;}
@@ -963,6 +961,4 @@ i{min-width:16px;}
 .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img{display:initial;}
 @media (min-width:1400px){
 	.img-responsive{width:100%;}
-	.error_img.img-responsive{width:50%;}
->>>>>>> 1daaebe9867e904e79f1458ca8e2056ed8e60148
-}
+	.error_img.img-responsive{width:50%;}}}

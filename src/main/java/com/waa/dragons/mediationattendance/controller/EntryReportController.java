@@ -26,14 +26,14 @@ public class EntryReportController {
     BlockService blockService;
 
 
-    @GetMapping("/getEntryReport")
+    @GetMapping("admin/getEntryReport")
     public String getEntryReport(Model model, @RequestParam(value = "entryId",required = false) Integer entryId,
     @RequestParam(value = "blockId", required = false) Integer blockId){
         model.addAttribute("entries", entryService.findAll());
 
         if(entryId != null){
             List<Attendance> attendances = new ArrayList<>();
-            if(blockId != null){
+            if(blockId != null && blockId > 0){
                 model.addAttribute("report",attendanceService.findAllByBlockIdAndEntryIdReport(blockId, entryId));
             } else {
                attendances = attendanceService.findEntryReport(entryService.findById(entryId).getName());
@@ -44,6 +44,6 @@ public class EntryReportController {
         }
         model.addAttribute("blocks", blockService.findAll());
 
-        return "entryReport";
+        return "report";
     }
 }

@@ -1,10 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/dashboard_layout}"
+      xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Student Page</title>
 </head>
 <body>
+
+
+
+<div class="col" layout:fragment="main-content">
+
+    <h4 class="panel-title">Welcome  <span th:text="${student.firstName} + ' ' + ${student.lastName}" th:remove="tag"></span>  </h4>
+
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Cumulative Attendance Info</h4>
+                </div>
+
+
+                <div class="panel-body">
+                    <h3 >Total sessions possible: <span th:text="${studentReport.totalSessionsPossible}"></span>  Days </h3>
+                    <h3 > Total sessions attended: <span th:text="${studentReport.totalSessionsAttended}"></span>  Days</h3>
+                    <h3 > Percent attendance: <span th:text="${studentReport.totalAttendancePercentage}">  </span> % </h3>
+                    <h3 > Remained attendance: <span th:text="${totalRemaining}"></span>   Days</h3>
+
+                    <!--<h2 th:if="${totalRemaining} > 10"> <span class="text-danger text-bold"> You better meditate!!!</span></h2>-->
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Current Block Attendance Info</h4>
+                </div>
+
+
+
+                <div class="panel-body">
+                    <h3 >Current Block: <span th:text="${currentBlock}"></span></h3>
+                    <h3 > Sessions in block: <span th:text="${stuBlockAttendReport.daysAvailable}"></span>  Days </h3>
+                    <h3 > Days present: <span th:text="${stuBlockAttendReport.daysPresent}"></span>  Days</h3>
+                    <h3>Percentage attended:	<span th:text="${stuBlockAttendReport.attendancePercentage}"></span>  %</h3>
+                    <h3>Extra credit points:	<span th:text="${stuBlockAttendReport.extraPoints}"></span>  Points</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+
+
+        <div class="col-md-9 col-sm-9">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Attendance Summary</h4>
+
+                </div>
+
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="control-label col-lg-3">Select Block</label>
+                        <div class="col-lg-6">
+
+
+                            <select name="select" class="form-control">
+                                <option th:each="block : ${blocks}" th:value="${block.block.id}" th:label="${block.block.blockName}"></option>
+                            </select>
+                            <!--
+                                                        <div class="form-group blu-margin">
+                                                            <select class="form-control" >
+                                                                <option value="0">select operator</option>
+                                                                <option th:each="operator : ${operators}" th:value="${operator}" th:text="${operator}"></option>
+                                                            </select>
+                                                        </div>-->
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="panel panel-flat">
+                    <div class="panel-heading">
+                        <h4 class="panel-title" th:text="${currentBlock} + ' Report'"> Report</h4>
+                    </div>
+
+
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>True/False</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            <tr th:each="day, index: ${blockDays}">
+                                <td th:text="${index.index+1}"></td>
+                                <td th:text="${day.key}"></td>
+                                <td th:text="${day.value}"></td></tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
 
 </body>
 </html>

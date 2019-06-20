@@ -19,7 +19,6 @@ public class DbDefaultWriter implements ItemWriter<Attendance> {
 
     @Override
     public void write(List<? extends Attendance> attendances) throws Exception {
-        System.out.println("Insert INTO Attendance " + attendances);
         for(Attendance attendance : attendances){
             attendanceService.save(attendance);
         }
