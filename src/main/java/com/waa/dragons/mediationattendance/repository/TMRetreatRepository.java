@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TMRetreatRepository extends CrudRepository<TMRetreat, Integer> {
+    TMRetreat findByStudentId(String studentId);
 }

@@ -17,15 +17,17 @@ import java.util.Map;
 public class AdminController {
 
 
+
     @GetMapping("")
     public String getAdminPage(){
+        System.out.println("admin");
         return "admin";
     }
 
 
     @GetMapping("/tmchecking")
     public String getTmForm(){
-        return "admin";
+        return "tmForm";
     }
 
     @PostMapping("/add/tmChecking")

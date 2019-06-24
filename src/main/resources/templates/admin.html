@@ -1,8 +1,15 @@
+<<<<<<< HEAD
+<!DOCTYPE>
+<html
+        xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+        layout:decorate="~{layouts/dashboard_layout}">
+=======
 
 <!DOCTYPE html>
 <html xmlns:layout="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layouts/dashboard_layout}"
       xmlns:th="http://www.thymeleaf.org">
+>>>>>>> semitti
 
 <head>
     <title>Admin Page</title>
@@ -21,6 +28,27 @@
         </div>
 
 
+<<<<<<< HEAD
+        <div class="panel-body">
+            <form th:action="@{/admin/uploadData}" class="horizontal" th:method="POST" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <div class="col-lg-10">
+                        <input type="file" class="file-input" name="file" id="fileupload"  size="40" value="fileupload" required="required"/>
+                        <input type="checkbox" class="checkbox" name="type" id="typeCheck" value="Check this if manual" />  Manual
+
+                        <br><input type="submit" value="Upload">
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body></html>
+
+=======
     <div class="panel-body">
         <form th:action="@{/admin/uploadData}" class="horizontal" th:method="POST" enctype="multipart/form-data">
 
@@ -37,3 +65,4 @@
 </div>
 
 </body></html>
+>>>>>>> semitti

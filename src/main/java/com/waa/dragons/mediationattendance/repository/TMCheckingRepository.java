@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TMCheckingRepository extends CrudRepository<TMChecking, Integer> {
+    TMChecking findAllByStudentId(String studentId);
 }

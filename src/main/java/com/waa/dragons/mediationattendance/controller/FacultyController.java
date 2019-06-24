@@ -54,43 +54,7 @@ public class FacultyController {
 
 
         model.addAttribute("firstName", "Tina");
-        /*Map<String, List<Integer>> students = new HashMap<>();
 
-        students.put("Abdu", Arrays.asList(22, 10, 12, 45));
-        students.put("Selome", Arrays.asList(22, 22, 0, 100));
-        students.put("Semhar", Arrays.asList(22, 21, 1, 95));
-        students.put("Mossab", Arrays.asList(22, 20, 0, 89));
-
-        model.addAttribute("students",students);
-
-
-
-        int totalSessionsPossible = 95;
-        int totalSessionsAttainded = 80;
-        int percentAttainded = totalSessionsAttainded*100/totalSessionsPossible;
-        int totalRemaining =  (totalSessionsPossible*60/100) - (totalSessionsAttainded);
-
-        model.addAttribute("totalSessionsPossible", totalSessionsPossible);
-        model.addAttribute("totalSessionsAttainded", totalSessionsAttainded);
-        model.addAttribute("percentAttainded", percentAttainded);
-        model.addAttribute("totalRemaining", totalRemaining);
-
-
-
-
-
-        return "facultyReport";
-    }
-
-
-    @RequestMapping(value = "/faculty/{id}")
-public String facultyCourseList(@PathVariable("id") Faculty faculty, Model model) {
-
-    List<Block> blocks = blockService.findAll();
-
-
-    model.addAttribute("blockList", blocks);
-*/
 
         model.addAttribute("currentBlock", "July");
         model.addAttribute("sessionInBlock", "22");

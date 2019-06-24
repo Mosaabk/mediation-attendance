@@ -1,19 +1,32 @@
 package com.waa.dragons.mediationattendance.domain;
 
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
+
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Date;
+
+
+import java.util.Date;
+
+@Entity
 @Data
 @NoArgsConstructor
-@Entity
+@AllArgsConstructor
 public class Attendance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
 
     @ManyToOne
     private Student student;
@@ -28,5 +41,6 @@ public class Attendance {
 
 
     private String type;
+
 
 }
